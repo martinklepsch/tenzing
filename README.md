@@ -14,15 +14,16 @@ features:
 1. Tenzing does not provide a backend layer (see below)
 1. Tenzing allows you to choose between Om, Reagent and others
 
-### Why Boot
+### Why Boot?
 
 In contrast to Leiningen Boot offers a clear strategy when it comes to
 composing multi-step build processes such as compiling stylesheets and
 javascript whenever a relevant file changes.
 
 Many Leinigen plugins come with an `auto` task that allows similar
-behaviour but ultimately starts multiple JVM processes which consume
-[significant memory](chestnut-mem).
+behavior. If you want to run multiple of those tasks it's usually done
+by starting multiple JVM instances which can lead to
+[high memory usage](chestnut-mem).
 
 Boot allows this sort of behaviour to reside in one JVM process while
 making sure that build steps don't interfere with each other.
