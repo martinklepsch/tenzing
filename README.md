@@ -37,8 +37,8 @@ Tenzing is designed with prototyping in mind. Instead of writing your
 own backend you're encouraged to use services like [Parse][parse],
 [Firebase][firebase], [Usergrid][usergrid] and others.
 
-If you figure out that you need a Clojure based server down the road
-it's simple either add it yourself or create it as a standalone
+If you figure out that you need a Clojure based backend down the road
+it's simple to either add it yourself or create it as a standalone
 service that's being used by your clients.
 
 Please, also consider [offline first][offline-first] as an approach
