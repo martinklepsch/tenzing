@@ -49,9 +49,10 @@ for building early iterations of your application.
 
 ## Usage
 
-```
-lein new tenzing your-app
-```
+    $ lein new tenzing your-app
+    $ cd your-app
+    $ boot development
+    # go to http://localhost:3000/
 
 ### Options — WIP: none implemented yet
 
