@@ -17,7 +17,7 @@ features:
 ### Why Boot
 
 In contrast to Leiningen Boot offers a clear strategy when it comes to
-composing complex build processes such as compiling stylesheets and
+composing multi-step build processes such as compiling stylesheets and
 javascript whenever a relevant file changes.
 
 Many Leinigen plugins come with an `auto` task that allows similar
