@@ -76,12 +76,14 @@ The easiest way to deploy your app is using [Divshot][divshot].
 
 1. `$ divshot login`
 1. add [divshot.json][divshot-json]
+
         {
           "name": "your-app",
           "root": "target/public",
           "clean_urls": true,
           "error_page": "error.html"
         }
+
 1. `$ divshot push`
 
 Since Tenzing comes without a backend you can also easily deploy
