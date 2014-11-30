@@ -59,6 +59,7 @@ Currently the following options are supported:
 
 - `+om`: provides a basic Om application and adds relevant dependencies.
 - `+reagent`: provides a basic Reagent application and adds relevant dependencies.
+- `+divshot`: adds divshot.json for easy deployment to divshot
 - `+garden`: setup [Garden][garden] and integrate into build process
 - `+sass`: setup [Sass][sass] and integrate into build process
 
@@ -76,6 +77,16 @@ For more sophisticated solutions checkout [Divshot][divshot]
 or things like [Firebase Hosting][firebase-hosting].
 
 **How to deploy your Tenzing app to Divshot:**
+
+1. `$ divshot login`
+1. add [divshot.json][divshot-json]:
+    {
+      "name": "your-app",
+      "root": "target/public",
+      "clean_urls": true,
+      "error_page": "error.html"
+    }
+1. `$ divshot push`
 
 ## License
 
