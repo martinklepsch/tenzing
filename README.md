@@ -23,10 +23,9 @@ javascript whenever a relevant file changes.
 Many Leinigen plugins come with an `auto` task that allows similar
 behavior. If you want to run multiple of those tasks it's usually done
 by starting multiple JVM instances which can lead to
-[high memory usage](chestnut-mem).
-
-Boot allows this sort of behaviour to reside in one JVM process while
-making sure that build steps don't interfere with each other.
+[high memory usage](chestnut-mem). Boot allows this sort of behaviour
+to reside in one JVM process while making sure that build steps don't
+interfere with each other.
 
 You can learn more about Boot in
 [a blog post by one of the authors][clojurescript-rebooted], it's
