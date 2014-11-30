@@ -69,12 +69,7 @@ whenever preprocessing of files or similar things are required.
 
 ## Deployment
 
-Since Tenzing comes without a backend deploying is as easy as putting the files
-in Boot's `:target-dir` into an S3 bucket, your Dropbox or any other location
-that's accessible through your web browser.
-
-For more sophisticated solutions checkout [Divshot][divshot]
-or things like [Firebase Hosting][firebase-hosting].
+The easiest way to deploy your app is using [Divshot][divshot].
 
 **How to deploy your Tenzing app to Divshot:**
 
@@ -87,6 +82,10 @@ or things like [Firebase Hosting][firebase-hosting].
       "error_page": "error.html"
     }
 1. `$ divshot push`
+
+Since Tenzing comes without a backend you can also easily deploy
+your app to Amazon S3 or even host it in your Dropbox. To do that
+just copy the files in `target/public/` to your desired location.
 
 ## License
 
