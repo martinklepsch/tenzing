@@ -4,6 +4,18 @@
 
 (def render (renderer "tenzing"))
 
+(defn reagent? [opts]
+  (some #{"+reagent"} opts))
+
+(defn om? [opts]
+  (some #{"+om"} opts))
+
+(defn sass? [opts]
+  (some #{"+sass"} opts))
+
+(defn sass? [opts]
+  (some #{"+garden"} opts))
+
 (defn tenzing
   "FIXME: write documentation"
   [name]
@@ -11,4 +23,7 @@
               :sanitized (name-to-path name)}]
     (main/info "Generating fresh 'lein new' tenzing project.")
     (->files data
-             ["src/{{sanitized}}/foo.clj" (render "foo.clj" data)])))
+             ;["src/{{sanitized}}/foo.clj" (render "foo.clj" data)]
+             ["resources/public/index.html" (render "index.html" data)]
+             ["src/cljs/{{sanitized}}/app.cljs" (render "app.cljs" data)]
+             ["build.boot" (render "build.boot" data)])))
