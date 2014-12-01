@@ -1,7 +1,7 @@
-# tenzing
+# Tenzing
 
 Tenzing is a template for Clojurescript applications inspired by
-[Chestnut][chestnut].  Just like Chestnut it offers the following
+[Chestnut][chestnut]. Just like Chestnut it offers the following
 features:
 
 1. Easy Clojurescript compilation
@@ -58,15 +58,17 @@ for building early iterations of your application.
 
 Currently the following options are supported:
 
-- `+om`: provides a basic Om application and adds relevant dependencies.
-- `+reagent`: provides a basic Reagent application and adds relevant dependencies.
-- `+divshot`: adds divshot.json for easy deployment to divshot
-- `+garden`: setup [Garden][garden] and integrate into build process
-- `+sass`: setup [Sass][sass] and integrate into build process
+- `+om` provides a basic Om application and adds relevant dependencies.
+- `+reagent` provides a basic Reagent application and adds relevant dependencies.
+- `+divshot` adds divshot.json for easy deployment to divshot
+- `+garden` sets up [Garden][garden] and integrates into build process
+- `+sass` sets up [Sass][sass] and integrates into build process
 
 If you want to add an option, pull-requests are welcome. Please make sure
 that all combinations still work with your new option. Also use boot tasks
 whenever preprocessing of files or similar things are required.
+
+Some ideas for additional options: `+om-tools`, `+freactive`.
 
 ## Deployment
 
@@ -111,3 +113,4 @@ your option) any later version.
 [sass]: http://sass-lang.com
 [firebase-hosting]: https://www.firebase.com/docs/hosting/
 [divshot]: https://divshot.com
+[divshot-json]: https://github.com/martinklepsch/tenzing/blob/master/resources/leiningen/new/tenzing/divshot.json
