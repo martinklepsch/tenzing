@@ -1,6 +1,5 @@
 (ns leiningen.new.tenzing
   (:require [leiningen.new.templates :as t :refer [name-to-path ->files sanitize slurp-resource]]
-            [fipp.edn :refer (pprint) :rename {pprint fipp}]
             [leiningen.core.main :as main]
             [clojure.string :as string]
             [clojure.java.io :as io]))
@@ -92,6 +91,12 @@
           (sass? opts) (conj (str "sass   [:line-numbers true
                                            :source-maps  true]"))))
 
+(defn index-html-head-tags [opts]
+  (let [style-tag #(str "<link href=\"" % "\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\">")]
+    (cond-> []
+            (garden? opts) (conj (style-tag "css/garden.css"))
+            (garden? opts) (conj (style-tag "css/sass.css")))))
+
 (defn template-data [name opts]
   {:name name
    :sanitized (name-to-path name)
@@ -100,7 +105,8 @@
    :requires (indent 1 (build-requires opts))
    :build-steps (indent 8 (build-steps name opts))
    :production-task-opts (indent 22 (production-task-opts opts))
-   :development-task-opts (indent 22 (development-task-opts opts))})
+   :development-task-opts (indent 22 (development-task-opts opts))
+   :index-html-head-tags (indent 4 (index-html-head-tags opts))})
 
 (defn warn-on-exclusive-opts! [opts]
   (when (and (om? opts)
