@@ -77,7 +77,7 @@ The easiest way to deploy your app is using [Divshot][divshot].
 **How to deploy your Tenzing app to Divshot:**
 
 1. `$ divshot login`
-1. add [divshot.json][divshot-json]
+1. add [divshot.json][divshot-json] (Only required if your project hasn't been created with the `+divshot` option.)
 
         {
           "name": "your-app",
