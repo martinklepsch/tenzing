@@ -54,13 +54,13 @@ for building early iterations of your application.
     $ boot development
     # go to http://localhost:3000/
 
-### Options — WIP: none implemented yet
+### Options — WIP
 
 Currently the following options are supported:
 
 - `+om` provides a basic Om application and adds relevant dependencies.
 - `+reagent` provides a basic Reagent application and adds relevant dependencies.
-- `+divshot` adds divshot.json for easy deployment to divshot
+- `+divshot` adds divshot.json for easy deployment to divshot ✓
 - `+garden` sets up [Garden][garden] and integrates into build process ✓
 - `+sass` sets up [Sass][sass] and integrates into build process ✓
 
