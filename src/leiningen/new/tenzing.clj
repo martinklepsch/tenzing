@@ -4,6 +4,9 @@
 
 (def render (renderer "tenzing"))
 
+(defn divshot? [opts]
+  (some #{"+divshot"} opts))
+
 (defn reagent? [opts]
   (some #{"+reagent"} opts))
 
@@ -13,17 +16,24 @@
 (defn sass? [opts]
   (some #{"+sass"} opts))
 
-(defn sass? [opts]
+(defn garden? [opts]
   (some #{"+garden"} opts))
 
 (defn tenzing
   "FIXME: write documentation"
-  [name]
-  (let [data {:name name
-              :sanitized (name-to-path name)}]
+  [name & opts]
+  (let [data     {:name name
+                  :sanitized (name-to-path name)}
+        app-cljs "src/cljs/{{sanitized}}/app.cljs"]
     (main/info "Generating fresh 'lein new' tenzing project.")
+    (when (and (om? opts) (reagent? opts))
+      (main/warn "Please specify only +om or +reagent, not both.")
+      (main/exit))
     (->files data
-             ;["src/{{sanitized}}/foo.clj" (render "foo.clj" data)]
+
+             (if (divshot? opts) ["divshot.json" (render "divshot.json" data)])
+             ;(if (om? opts) ["" (render "divshot.json" data)])
+
              ["resources/public/index.html" (render "index.html" data)]
-             ["src/cljs/{{sanitized}}/app.cljs" (render "app.cljs" data)]
-             ["build.boot" (render "build.boot" data)])))
+             ["build.boot" (render "build.boot" data)]
+             [app-cljs (render "app.cljs" data)])))
