@@ -30,7 +30,7 @@
 ;;           (io/reader resource))
 ;;         (main/abort (format "Template resource '%s' not found." path))))))
 
-(def render (renderer "tenzing"))
+(def render (t/renderer "tenzing"))
 
 ; Next three functions are copied from chestnut
 (defn wrap-indent [wrap n list]
@@ -62,26 +62,35 @@
   (some #{"+garden"} opts))
 
 (defn source-paths [opts]
-  (if (garden? opts)
-    #{"src/cljs" "src/clj"}
-    #{"src/cljs"}))
+  (cond-> #{"src/cljs"}
+          (garden? opts) (conj "src/clj")
+          (sass? opts)   (conj "sass")))
 
 (defn dependencies [opts]
   (cond-> []
           ; FIXME update garden to temdirs branch
-          (garden? opts) (conj "boot-garden \"1.2.5\"")))
+          (garden? opts) (conj "boot-garden \"1.2.5\"")
+          (sass?   opts) (conj "boot-sassc  \"0.1.0\"")))
 
 (defn build-requires [opts]
   (cond-> []
-          (garden? opts) (conj "'[boot-garden.core :refer [garden]]")))
+          (garden? opts) (conj "'[boot-garden.core :refer [garden]]")
+          (sass?   opts) (conj "'[boot-sassc.core  :refer [sass]]") ))
 
 (defn build-steps [name opts]
   (cond-> []
-          (garden? opts) (conj (str "(garden :styles-var '" name ".styles/screen\n:output-to \"public/css/screen.css\")"))))
+          (garden? opts) (conj (str "(garden :styles-var '" name ".styles/screen\n:output-to \"public/css/garden.css\")"))
+          (sass?   opts) (conj (str "(sass :output-to \"public/css/sass.css\")"))))
 
 (defn production-task-opts [opts]
   (cond-> []
-          (garden? opts (conj (str "garden [:pretty-print false]")))
+          (garden? opts) (conj (str "garden [:pretty-print false]"))
+          (garden? opts) (conj (str "sass   [:output-style \"compressed\"]"))))
+
+(defn development-task-opts [opts]
+  (cond-> []
+          (sass? opts) (conj (str "sass   [:line-numbers true
+                                           :source-maps  true]"))))
 
 (defn template-data [name opts]
   {:name name
@@ -90,7 +99,8 @@
    :deps (dep-list 17 (dependencies opts))
    :requires (indent 1 (build-requires opts))
    :build-steps (indent 8 (build-steps name opts))
-   :production-task-opts (indent 22 (production-task-opts opts))})
+   :production-task-opts (indent 22 (production-task-opts opts))
+   :development-task-opts (indent 22 (development-task-opts opts))})
 
 (defn warn-on-exclusive-opts! [opts]
   (when (and (om? opts)
@@ -106,8 +116,9 @@
     (main/info "Generating fresh 'lein new' tenzing project.")
     (warn-on-exclusive-opts! opts)
     (->files data
-             (if (divshot? opts) ["divshot.json" (render "divshot.json" data)])
+             ; (if (divshot? opts) ["divshot.json" (render "divshot.json" data)])
              (if (garden? opts) ["src/clj/{{sanitized}}/styles.clj" (render "styles.clj" data)])
+             (if (sass? opts)   ["sass/styles.sass" (render "styles.sass" data)])
 
              ["resources/public/index.html" (render "index.html" data)]
              ; replacement for serve task: https://github.com/pandeiro/boot-http
