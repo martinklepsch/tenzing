@@ -62,7 +62,7 @@ Currently the following options are supported:
 - `+reagent` provides a basic Reagent application and adds relevant dependencies.
 - `+divshot` adds divshot.json for easy deployment to divshot ✓
 - `+garden` sets up [Garden][garden] and integrates into build process ✓
-- `+sass` sets up [Sass][sass] and integrates into build process ✓
+- `+sass` sets up [Sass][sass] and integrates into build process (requires [libsass][libsass])✓
 
 If you want to add an option, pull-requests are welcome. Please make sure
 that all combinations still work with your new option. Also use boot tasks
@@ -92,6 +92,8 @@ Since Tenzing comes without a backend you can also easily deploy
 your app to Amazon S3 or even host it in your Dropbox. To do that
 just copy the files in `target/public/` to your desired location.
 
+> PS. A nice tool to easily deploy to S3 from the command line is [stout](https://github.com/EagerIO/Stout).
+
 ## License
 
 Copyright © 2014 Martin Klepsch
@@ -111,6 +113,7 @@ your option) any later version.
 [usergrid]: http://usergrid.incubator.apache.org
 [garden]: https://github.com/noprompt/garden
 [sass]: http://sass-lang.com
+[libsass]: http://libsass.org
 [firebase-hosting]: https://www.firebase.com/docs/hosting/
 [divshot]: https://divshot.com
 [divshot-json]: https://github.com/martinklepsch/tenzing/blob/master/resources/leiningen/new/tenzing/divshot.json
