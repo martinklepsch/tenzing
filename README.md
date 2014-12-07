@@ -52,23 +52,27 @@ for building early iterations of your application.
     $ lein new tenzing your-app
     $ cd your-app
     $ boot development
-    # go to http://localhost:3000/
 
-### Options — WIP
+After a moment of waiting you can head to [localhost:3000](http://localhost:3000) to see a small sample app.
+
+### Options
 
 Currently the following options are supported:
 
-- `+om` provides a basic Om application and adds relevant dependencies.
-- `+reagent` provides a basic Reagent application and adds relevant dependencies.
+- `+om` provides a basic Om application and adds relevant dependencies ✓
+- `+reagent` provides a basic Reagent application and adds relevant dependencies ✓
 - `+divshot` adds divshot.json for easy deployment to divshot ✓
 - `+garden` sets up [Garden][garden] and integrates into build process ✓
 - `+sass` sets up [Sass][sass] and integrates into build process (requires [libsass][libsass])✓
 
-If you want to add an option, pull-requests are welcome. Please make sure
-that all combinations still work with your new option. Also use boot tasks
-whenever preprocessing of files or similar things are required.
+If you want to add an option, pull-requests are welcome. Please make
+sure your option doesn't interfere with existing ones. Also use boot
+tasks whenever preprocessing of files or similar things are required.
 
-Some ideas for additional options: `+om-tools`, `+freactive`.
+Some ideas for additional options: `+om-tools`, `+freactive`, `+cljs-test`.
+
+I'm also not against adding options that provide a backend layer, I just
+preferred to have it optional.
 
 ## Deployment
 
