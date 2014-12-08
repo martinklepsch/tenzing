@@ -3,7 +3,7 @@
  :rsc-paths    #{"resources"}
  :dependencies '[[adzerk/boot-cljs      "0.0-2371-27" :scope "test"]
                  [adzerk/boot-cljs-repl "0.1.6"       :scope "test"]
-                 [adzerk/boot-reload    "0.1.6"       :scope "test"]{{{deps}}}])
+                 [adzerk/boot-reload    "0.1.7"       :scope "test"]{{{deps}}}])
 
 (require
  '[adzerk.boot-cljs      :refer [cljs]]

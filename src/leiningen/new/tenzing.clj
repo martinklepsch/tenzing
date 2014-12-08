@@ -66,10 +66,13 @@
           (sass? opts)   (conj "sass")))
 
 (defn dependencies [opts]
-  (cond-> []
-          ; FIXME update garden to temdirs branch
-          (garden? opts) (conj "boot-garden \"1.2.5\"")
-          (sass?   opts) (conj "boot-sassc  \"0.1.0\"")))
+  (cond-> ["pandeiro/boot-http \"0.2.0\""]
+          (om?      opts) (conj "om \"0.7.3\"")
+          (reagent? opts) (conj "reagent \"0.4.3\"")
+          (garden?  opts) (conj "boot-garden \"1.2.5\"")
+          (sass?    opts) (conj "boot-sassc  \"0.1.0\"")
+          (or (reagent? opts)
+              (om?      opts)) (conj "cljsjs/react \"0.11.2\"")))
 
 (defn build-requires [opts]
   (cond-> []
@@ -124,9 +127,10 @@
     (apply (partial ->files data)
            (remove nil?
                    (vector (if (divshot? opts) ["divshot.json" (render "divshot.json" data)])
-                           (if (garden? opts) ["src/clj/{{sanitized}}/styles.clj" (render "styles.clj" data)])
-                           (if (sass? opts)   ["sass/styles.sass" (render "styles.sass" data)])
+                           (if (garden? opts)  ["src/clj/{{sanitized}}/styles.clj" (render "styles.clj" data)])
+                           (if (sass? opts)    ["sass/styles.sass" (render "styles.sass" data)])
+                           (if (reagent? opts) [app-cljs (render "reagent-app.cljs" data)])
+                           (if (om? opts)      [app-cljs (render "om-app.cljs" data)])
 
                            ["resources/public/index.html" (render "index.html" data)]
-                           ["build.boot" (render "build.boot" data)]
-                           [app-cljs (render "reagent-app.cljs" data)])))))
+                           ["build.boot" (render "build.boot" data)])))))
