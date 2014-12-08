@@ -61,7 +61,7 @@ Currently the following options are supported:
 
 - `+om` provides a basic Om application and adds relevant dependencies ✓
 - `+reagent` provides a basic Reagent application and adds relevant dependencies ✓
-- `+divshot` adds divshot.json for easy deployment to divshot ✓
+- `+divshot` adds divshot.json for easy deployment to [Divshot](divshot) ✓
 - `+garden` sets up [Garden][garden] and integrates into build process ✓
 - `+sass` sets up [Sass][sass] and integrates into build process (requires [libsass][libsass])✓
 
