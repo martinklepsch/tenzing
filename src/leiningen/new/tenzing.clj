@@ -98,7 +98,7 @@
   (let [style-tag #(str "<link href=\"" % "\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\">")]
     (cond-> []
             (garden? opts) (conj (style-tag "css/garden.css"))
-            (garden? opts) (conj (style-tag "css/sass.css")))))
+            (sass?   opts) (conj (style-tag "css/sass.css")))))
 
 (defn template-data [name opts]
   {:name name
