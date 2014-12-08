@@ -84,7 +84,7 @@
 (defn production-task-opts [opts]
   (cond-> []
           (garden? opts) (conj (str "garden [:pretty-print false]"))
-          (garden? opts) (conj (str "sass   [:output-style \"compressed\"]"))))
+          (sass?   opts) (conj (str "sass   [:output-style \"compressed\"]"))))
 
 (defn development-task-opts [opts]
   (cond-> []
@@ -121,12 +121,12 @@
         app-cljs "src/cljs/{{sanitized}}/app.cljs"]
     (main/info "Generating fresh 'lein new' tenzing project.")
     (warn-on-exclusive-opts! opts)
-    (->files data
-             ; (if (divshot? opts) ["divshot.json" (render "divshot.json" data)])
-             (if (garden? opts) ["src/clj/{{sanitized}}/styles.clj" (render "styles.clj" data)])
-             (if (sass? opts)   ["sass/styles.sass" (render "styles.sass" data)])
+    (apply (partial ->files data)
+           (remove nil?
+                   (vector (if (divshot? opts) ["divshot.json" (render "divshot.json" data)])
+                           (if (garden? opts) ["src/clj/{{sanitized}}/styles.clj" (render "styles.clj" data)])
+                           (if (sass? opts)   ["sass/styles.sass" (render "styles.sass" data)])
 
-             ["resources/public/index.html" (render "index.html" data)]
-             ; replacement for serve task: https://github.com/pandeiro/boot-http
-             ["build.boot" (render "build.boot" data)]
-             [app-cljs (render "app.cljs" data)])))
+                           ["resources/public/index.html" (render "index.html" data)]
+                           ["build.boot" (render "build.boot" data)]
+                           [app-cljs (render "reagent-app.cljs" data)])))))
