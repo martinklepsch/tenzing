@@ -66,10 +66,10 @@
           (sass? opts)   (conj "sass")))
 
 (defn dependencies [opts]
-  (cond-> ["pandeiro/boot-http \"0.2.0\""]
+  (cond-> ["pandeiro/boot-http \"0.3.0\""]
           (om?      opts) (conj "om \"0.7.3\"")
           (reagent? opts) (conj "reagent \"0.4.3\"")
-          (garden?  opts) (conj "boot-garden \"1.2.5\"")
+          (garden?  opts) (conj "boot-garden \"1.2.5-1\"")
           (sass?    opts) (conj "boot-sassc  \"0.1.0\"")
           (or (reagent? opts)
               (om?      opts)) (conj "cljsjs/react \"0.11.2\"")))
@@ -86,13 +86,13 @@
 
 (defn production-task-opts [opts]
   (cond-> []
-          (garden? opts) (conj (str "garden [:pretty-print false]"))
-          (sass?   opts) (conj (str "sass   [:output-style \"compressed\"]"))))
+          (garden? opts) (conj (str "garden {:pretty-print false}"))
+          (sass?   opts) (conj (str "sass   {:output-style \"compressed\"}"))))
 
 (defn development-task-opts [opts]
   (cond-> []
-          (sass? opts) (conj (str "sass   [:line-numbers true
-                                           :source-maps  true]"))))
+          (sass? opts) (conj (str "sass   {:line-numbers true
+                                           :source-maps  true}"))))
 
 (defn index-html-head-tags [opts]
   (let [style-tag #(str "<link href=\"" % "\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\">")]
