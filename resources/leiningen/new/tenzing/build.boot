@@ -14,7 +14,7 @@
 (deftask run
   ""
   []
-  (comp ;(serve :dir "target/public")
+  (comp (serve :dir "target/public")
         (watch)
         (speak)
         (cljs-repl)

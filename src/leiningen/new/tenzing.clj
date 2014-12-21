@@ -67,12 +67,10 @@
 
 (defn dependencies [opts]
   (cond-> ["pandeiro/boot-http \"0.3.0\""]
-          (om?      opts) (conj "om \"0.7.3\"")
-          (reagent? opts) (conj "reagent \"0.4.3\"")
+          (om?      opts) (conj "om \"0.7.3\"" "cljsjs/react \"0.11.2\"")
+          (reagent? opts) (conj "reagent \"0.4.3\"" "cljsjs/react \"0.12.1\"")
           (garden?  opts) (conj "boot-garden \"1.2.5-1\"")
-          (sass?    opts) (conj "boot-sassc  \"0.1.0\"")
-          (or (reagent? opts)
-              (om?      opts)) (conj "cljsjs/react \"0.11.2\"")))
+          (sass?    opts) (conj "boot-sassc  \"0.1.0\"")))
 
 (defn build-requires [opts]
   (cond-> []
@@ -82,7 +80,9 @@
 (defn build-steps [name opts]
   (cond-> []
           (garden? opts) (conj (str "(garden :styles-var '" name ".styles/screen\n:output-to \"public/css/garden.css\")"))
-          (sass?   opts) (conj (str "(sass :output-to \"public/css/sass.css\")"))))
+          (sass?   opts) (conj (str "(sass :output-to \"public/css/sass.css\")"))
+          (or (om? opts)
+              (reagent? opts)) (conj (str "(js-import :combined-preamble \"public/js/preamble.js\")"))))
 
 (defn production-task-opts [opts]
   (cond-> []
@@ -95,20 +95,29 @@
                                            :source-maps  true}"))))
 
 (defn index-html-head-tags [opts]
-  (let [style-tag #(str "<link href=\"" % "\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\">")]
+  (letfn [(style-tag [href] (str "<link href=\"" href "\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\">"))]
     (cond-> []
-            (garden? opts) (conj (style-tag "css/garden.css"))
-            (sass?   opts) (conj (style-tag "css/sass.css")))))
+            (garden? opts)
+            (conj (style-tag "css/garden.css"))
+            (sass? opts)
+            (conj (style-tag "css/sass.css")))))
+
+(defn index-html-script-tags [opts]
+  (letfn [(script-tag [src] (str "<script type=\"text/javascript\" src=\"" src "\"></script>"))]
+    (cond-> [(script-tag "js/app.js")]
+            (or (om? opts) (reagent? opts))
+            (conj (script-tag "js/preamble.js")))))
 
 (defn template-data [name opts]
   {:name name
    :sanitized (name-to-path name)
    :source-paths (source-paths opts)
-   :deps (dep-list 17 (dependencies opts))
+   :deps (dep-list 18 (dependencies opts))
    :requires (indent 1 (build-requires opts))
    :build-steps (indent 8 (build-steps name opts))
    :production-task-opts (indent 22 (production-task-opts opts))
    :development-task-opts (indent 22 (development-task-opts opts))
+   :index-html-script-tags (indent 4 (index-html-script-tags opts))
    :index-html-head-tags (indent 4 (index-html-head-tags opts))})
 
 (defn warn-on-exclusive-opts! [opts]
