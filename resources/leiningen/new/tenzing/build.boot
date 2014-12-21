@@ -32,6 +32,6 @@
   ""
   []
   (task-options! cljs {:optimizations :none
-                       :unified true
-                       :source-maps true}{{{development-task-opts}}})
+                       :unified-mode true
+                       :source-map true}{{{development-task-opts}}})
   (run))
