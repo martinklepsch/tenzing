@@ -76,7 +76,8 @@
 (defn build-requires [opts]
   (cond-> []
           (garden? opts) (conj "'[boot-garden.core :refer [garden]]")
-          (sass?   opts) (conj "'[boot-sassc.core  :refer [sass]]") ))
+          (sass?   opts) (conj "'[boot-sassc.core  :refer [sass]]")
+          (or (om? opts) (reagent? opts)) (conj "'[cljsjs.app :refer [js-import]]") ))
 
 (defn build-steps [name opts]
   (cond-> []
