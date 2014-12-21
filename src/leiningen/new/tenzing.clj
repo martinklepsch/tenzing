@@ -106,9 +106,9 @@
 
 (defn index-html-script-tags [opts]
   (letfn [(script-tag [src] (str "<script type=\"text/javascript\" src=\"" src "\"></script>"))]
-    (cond-> [(script-tag "js/app.js")]
-            (or (om? opts) (reagent? opts))
-            (conj (script-tag "js/preamble.js")))))
+    (reverse (cond-> [(script-tag "js/app.js")]
+                     (or (om? opts) (reagent? opts))
+                     (conj (script-tag "js/preamble.js"))))))
 
 (defn template-data [name opts]
   {:name name
