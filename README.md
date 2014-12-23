@@ -87,7 +87,7 @@ The easiest way to deploy your app is using [Divshot][divshot].
 
         {
           "name": "your-app",
-          "root": "target/public",
+          "root": "target",
           "clean_urls": true,
           "error_page": "error.html"
         }
@@ -96,7 +96,7 @@ The easiest way to deploy your app is using [Divshot][divshot].
 
 Since Tenzing comes without a backend you can also easily deploy
 your app to Amazon S3 or even host it in your Dropbox. To do that
-just copy the files in `target/public/` to your desired location.
+just copy the files in `target/` to your desired location.
 
 > PS. A nice tool to easily deploy to S3 from the command line is [stout](https://github.com/EagerIO/Stout).
 

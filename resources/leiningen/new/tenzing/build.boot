@@ -14,11 +14,11 @@
 (deftask run
   ""
   []
-  (comp (serve :dir "target/public")
+  (comp (serve :dir "target")
         (watch)
         (speak)
         (cljs-repl)
-        (cljs :output-to "public/js/app.js")
+        (cljs :output-to "js/app.js")
         {{{build-steps}}}
         (reload)))
 

@@ -81,10 +81,10 @@
 
 (defn build-steps [name opts]
   (cond-> []
-          (garden? opts) (conj (str "(garden :styles-var '" name ".styles/screen\n:output-to \"public/css/garden.css\")"))
-          (sass?   opts) (conj (str "(sass :output-to \"public/css/sass.css\")"))
+          (garden? opts) (conj (str "(garden :styles-var '" name ".styles/screen\n:output-to \"css/garden.css\")"))
+          (sass?   opts) (conj (str "(sass :output-to \"css/sass.css\")"))
           (or (om? opts)
-              (reagent? opts)) (conj (str "(js-import :combined-preamble \"public/js/preamble.js\")"))))
+              (reagent? opts)) (conj (str "(from-cljsjs)"))))
 
 (defn production-task-opts [opts]
   (cond-> []
@@ -144,5 +144,5 @@
                            (if (reagent? opts) [app-cljs (render "reagent-app.cljs" data)])
                            (if (om? opts)      [app-cljs (render "om-app.cljs" data)])
 
-                           ["resources/public/index.html" (render "index.html" data)]
+                           ["resources/index.html" (render "index.html" data)]
                            ["build.boot" (render "build.boot" data)])))))
