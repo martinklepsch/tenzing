@@ -68,16 +68,16 @@
 (defn dependencies [opts]
   (cond-> ["pandeiro/boot-http \"0.3.0\""]
           (om?      opts) (conj "om \"0.7.3\"" "cljsjs/react \"0.11.2\"")
-          (reagent? opts) (conj "reagent \"0.4.3\"" "cljsjs/react \"0.12.1\"")
+          (reagent? opts) (conj "reagent \"0.4.3\"" "cljsjs/react \"0.12.2-1\"")
           (garden?  opts) (conj "boot-garden \"1.2.5-1\"")
           (sass?    opts) (conj "boot-sassc  \"0.1.0\"")
-          (or (om? opts) (reagent? opts)) (conj "cljsjs/boot-cljsjs \"0.2.3-SNAPSHOT\"")))
+          (or (om? opts) (reagent? opts)) (conj "cljsjs/boot-cljsjs \"0.3.0\"")))
 
 (defn build-requires [opts]
   (cond-> []
           (garden? opts) (conj "'[boot-garden.core :refer [garden]]")
           (sass?   opts) (conj "'[boot-sassc.core  :refer [sass]]")
-          (or (om? opts) (reagent? opts)) (conj "'[cljsjs.app :refer [js-import]]") ))
+          (or (om? opts) (reagent? opts)) (conj "'[cljsjs.app :refer [from-cljsjs]]") ))
 
 (defn build-steps [name opts]
   (cond-> []
@@ -106,10 +106,11 @@
 
 (defn index-html-script-tags [opts]
   (letfn [(script-tag [src] (str "<script type=\"text/javascript\" src=\"" src "\"></script>"))]
-    (conj (cond-> []
-            (or (om? opts) (reagent? opts))
-            (conj (script-tag "js/preamble.js")))
-          (script-tag "js/app.js"))))
+    (cond-> []
+            false ;(or (om? opts) (reagent? opts))
+            (conj (script-tag "js/preamble.js"))
+            :finally
+            (conj (script-tag "js/app.js")))))
 
 (defn template-data [name opts]
   {:name name
