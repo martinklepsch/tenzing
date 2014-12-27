@@ -60,6 +60,9 @@
 (defn garden? [opts]
   (some #{"+garden"} opts))
 
+(defn cljs-lib? [opts]
+  (or (om? opts) (reagent? opts)))
+
 (defn source-paths [opts]
   (cond-> #{"src/cljs"}
           (garden? opts) (conj "src/clj")
@@ -144,6 +147,7 @@
                            (if (sass? opts)    ["sass/styles.sass" (render "styles.sass" data)])
                            (if (reagent? opts) [app-cljs (render "reagent-app.cljs" data)])
                            (if (om? opts)      [app-cljs (render "om-app.cljs" data)])
+                           (if (not (cljs-lib? opts)) [app-cljs (render "app.cljs" data)])
 
                            ["resources/index.html" (render "index.html" data)]
                            ["build.boot" (render "build.boot" data)])))))
