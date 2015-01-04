@@ -59,7 +59,7 @@
 
 ; derived option
 (defn cljsjs? [opts]
-  (or (om? opts) (reagent opts)))
+  (or (om? opts) (reagent? opts)))
 
 (defn sass? [opts]
   (some #{"+sass"} opts))
@@ -89,6 +89,10 @@
           (garden? opts) (conj "'[boot-garden.core :refer [garden]]")
           (sass?   opts) (conj "'[boot-sassc.core  :refer [sass]]")
           (cljsjs? opts) (conj "'[cljsjs.app :refer [from-cljsjs]]")))
+
+(defn pre-build-steps [name opts]
+  (cond-> []
+          (cljsjs? opts) (conj (str "(from-cljsjs)"))))
 
 (defn build-steps [name opts]
   (cond-> []
@@ -128,6 +132,7 @@
    :source-paths           (source-paths opts)
    :deps                   (dep-list 18 (dependencies opts))
    :requires               (indent 1 (build-requires opts))
+   :pre-build-steps        (indent 8 (pre-build-steps name opts))
    :build-steps            (indent 8 (build-steps name opts))
    :production-task-opts   (indent 22 (production-task-opts opts))
    :development-task-opts  (indent 22 (development-task-opts opts))

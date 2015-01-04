@@ -10,12 +10,13 @@
  '[adzerk.boot-cljs      :refer [cljs]]
  '[adzerk.boot-cljs-repl :refer [cljs-repl]]
  '[adzerk.boot-reload    :refer [reload]]
- '[pandeiro.http         :refer [serve]]{{{requires}}})
+ '[pandeiro.boot-http    :refer [serve]]{{{requires}}})
 
 (deftask run
   ""
   []
-  (comp (serve :dir "target")
+  (comp (serve)
+        {{{pre-build-steps}}}
         (watch)
         (speak)
         (cljs-repl)
