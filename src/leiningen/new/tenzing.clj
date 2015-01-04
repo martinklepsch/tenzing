@@ -44,6 +44,9 @@
 (defn indent [n list]
   (wrap-indent identity n list))
 
+; ---------------------------------------------------------------
+; Options - currently: divshot, reagent, om, sass, garden
+; ---------------------------------------------------------------
 
 (defn divshot? [opts]
   (some #{"+divshot"} opts))
@@ -60,8 +63,9 @@
 (defn garden? [opts]
   (some #{"+garden"} opts))
 
-(defn cljs-lib? [opts]
-  (or (om? opts) (reagent? opts)))
+;; ---------------------------------------------------------------
+;; Template data helpers
+;; ---------------------------------------------------------------
 
 (defn source-paths [opts]
   (cond-> #{"src/cljs"}
@@ -127,14 +131,16 @@
    :index-html-script-tags (indent 4 (index-html-script-tags opts))
    :index-html-head-tags (indent 4 (index-html-head-tags opts))})
 
-(defn warn-on-exclusive-opts! [opts]
+(defn warn-on-exclusive-opts!
+  "Some options can't be used together w/o added complexity."
+  [opts]
   (when (and (om? opts)
              (reagent? opts))
     (main/warn "Please specify only +om or +reagent, not both.")
     (main/exit)))
 
 (defn tenzing
-  "FIXME: write documentation"
+  "Main function to generate new tenzing project."
   [name & opts]
   (let [data     (template-data name opts)
         app-cljs "src/cljs/{{sanitized}}/app.cljs"]
@@ -145,9 +151,9 @@
                    (vector (if (divshot? opts) ["divshot.json" (render "divshot.json" data)])
                            (if (garden? opts)  ["src/clj/{{sanitized}}/styles.clj" (render "styles.clj" data)])
                            (if (sass? opts)    ["sass/styles.sass" (render "styles.sass" data)])
-                           (if (reagent? opts) [app-cljs (render "reagent-app.cljs" data)])
-                           (if (om? opts)      [app-cljs (render "om-app.cljs" data)])
-                           (if (not (cljs-lib? opts)) [app-cljs (render "app.cljs" data)])
+                           (cond (reagent? opts) [app-cljs (render "reagent-app.cljs" data)]
+                                 (om? opts)      [app-cljs (render "om-app.cljs" data)]
+                                 :none           [app-cljs (render "app.cljs" data)])
 
                            ["resources/index.html" (render "index.html" data)]
                            ["build.boot" (render "build.boot" data)])))))
