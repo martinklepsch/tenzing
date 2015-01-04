@@ -57,6 +57,10 @@
 (defn om? [opts]
   (some #{"+om"} opts))
 
+; derived option
+(defn cljsjs? [opts]
+  (or (om? opts) (reagent opts)))
+
 (defn sass? [opts]
   (some #{"+sass"} opts))
 
@@ -78,20 +82,19 @@
           (reagent? opts) (conj "reagent \"0.4.3\"" "cljsjs/react \"0.12.2-1\"")
           (garden?  opts) (conj "boot-garden \"1.2.5-1\"")
           (sass?    opts) (conj "boot-sassc  \"0.1.0\"")
-          (or (om? opts) (reagent? opts)) (conj "cljsjs/boot-cljsjs \"0.3.0\"")))
+          (cljsjs?  opts) (conj "cljsjs/boot-cljsjs \"0.3.0\"")))
 
 (defn build-requires [opts]
   (cond-> []
           (garden? opts) (conj "'[boot-garden.core :refer [garden]]")
           (sass?   opts) (conj "'[boot-sassc.core  :refer [sass]]")
-          (or (om? opts) (reagent? opts)) (conj "'[cljsjs.app :refer [from-cljsjs]]") ))
+          (cljsjs? opts) (conj "'[cljsjs.app :refer [from-cljsjs]]")))
 
 (defn build-steps [name opts]
   (cond-> []
           (garden? opts) (conj (str "(garden :styles-var '" name ".styles/screen\n:output-to \"css/garden.css\")"))
           (sass?   opts) (conj (str "(sass :output-to \"css/sass.css\")"))
-          (or (om? opts)
-              (reagent? opts)) (conj (str "(from-cljsjs)"))))
+          (cljsjs? opts) (conj (str "(from-cljsjs)"))))
 
 (defn production-task-opts [opts]
   (cond-> []
@@ -151,6 +154,7 @@
                    (vector (if (divshot? opts) ["divshot.json" (render "divshot.json" data)])
                            (if (garden? opts)  ["src/clj/{{sanitized}}/styles.clj" (render "styles.clj" data)])
                            (if (sass? opts)    ["sass/styles.sass" (render "styles.sass" data)])
+
                            (cond (reagent? opts) [app-cljs (render "reagent-app.cljs" data)]
                                  (om? opts)      [app-cljs (render "om-app.cljs" data)]
                                  :none           [app-cljs (render "app.cljs" data)])
