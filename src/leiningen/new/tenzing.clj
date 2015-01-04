@@ -106,30 +106,30 @@
 (defn index-html-head-tags [opts]
   (letfn [(style-tag [href] (str "<link href=\"" href "\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\">"))]
     (cond-> []
-            (garden? opts)
-            (conj (style-tag "css/garden.css"))
-            (sass? opts)
-            (conj (style-tag "css/sass.css")))))
+            (garden? opts) (conj (style-tag "css/garden.css"))
+            (sass? opts)   (conj (style-tag "css/sass.css")))))
 
 (defn index-html-script-tags [opts]
   (letfn [(script-tag [src] (str "<script type=\"text/javascript\" src=\"" src "\"></script>"))]
     (cond-> []
-            false ;(or (om? opts) (reagent? opts))
-            (conj (script-tag "js/preamble.js"))
-            :finally
-            (conj (script-tag "js/app.js")))))
+            ; (or (om? opts) (reagent? opts))
+            ; the preamble can also be handled by boot-cljs'
+            ; unified-mode which will load any .inc.js files
+            ; in the shim it generates
+            false    (conj (script-tag "js/preamble.js"))
+            :finally (conj (script-tag "js/app.js")))))
 
 (defn template-data [name opts]
-  {:name name
-   :sanitized (name-to-path name)
-   :source-paths (source-paths opts)
-   :deps (dep-list 18 (dependencies opts))
-   :requires (indent 1 (build-requires opts))
-   :build-steps (indent 8 (build-steps name opts))
-   :production-task-opts (indent 22 (production-task-opts opts))
-   :development-task-opts (indent 22 (development-task-opts opts))
+  {:name                   name
+   :sanitized              (name-to-path name)
+   :source-paths           (source-paths opts)
+   :deps                   (dep-list 18 (dependencies opts))
+   :requires               (indent 1 (build-requires opts))
+   :build-steps            (indent 8 (build-steps name opts))
+   :production-task-opts   (indent 22 (production-task-opts opts))
+   :development-task-opts  (indent 22 (development-task-opts opts))
    :index-html-script-tags (indent 4 (index-html-script-tags opts))
-   :index-html-head-tags (indent 4 (index-html-head-tags opts))})
+   :index-html-head-tags   (indent 4 (index-html-head-tags opts))})
 
 (defn warn-on-exclusive-opts!
   "Some options can't be used together w/o added complexity."
