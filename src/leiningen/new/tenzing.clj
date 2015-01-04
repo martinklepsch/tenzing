@@ -77,7 +77,7 @@
           (sass? opts)   (conj "sass")))
 
 (defn dependencies [opts]
-  (cond-> ["pandeiro/boot-http \"0.3.0\""]
+  (cond-> []
           (om?      opts) (conj "om \"0.7.3\"" "cljsjs/react \"0.11.2\"")
           (reagent? opts) (conj "reagent \"0.4.3\"" "cljsjs/react \"0.12.2-1\"")
           (garden?  opts) (conj "boot-garden \"1.2.5-1\"")
