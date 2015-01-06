@@ -82,13 +82,13 @@
           (reagent? opts) (conj "reagent \"0.4.3\"" "cljsjs/react \"0.12.2-1\"")
           (garden?  opts) (conj "boot-garden \"1.2.5-1\"")
           (sass?    opts) (conj "boot-sassc  \"0.1.0\"")
-          (cljsjs?  opts) (conj "cljsjs/boot-cljsjs \"0.3.0\"")))
+          (cljsjs?  opts) (conj "cljsjs/boot-cljsjs \"0.4.0\"")))
 
 (defn build-requires [opts]
   (cond-> []
           (garden? opts) (conj "'[boot-garden.core :refer [garden]]")
           (sass?   opts) (conj "'[boot-sassc.core  :refer [sass]]")
-          (cljsjs? opts) (conj "'[cljsjs.app :refer [from-cljsjs]]")))
+          (cljsjs? opts) (conj "'[cljsjs.boot-cljsjs :refer [from-cljsjs]]")))
 
 (defn pre-build-steps [name opts]
   (cond-> []
@@ -97,8 +97,7 @@
 (defn build-steps [name opts]
   (cond-> []
           (garden? opts) (conj (str "(garden :styles-var '" name ".styles/screen\n:output-to \"css/garden.css\")"))
-          (sass?   opts) (conj (str "(sass :output-to \"css/sass.css\")"))
-          (cljsjs? opts) (conj (str "(from-cljsjs)"))))
+          (sass?   opts) (conj (str "(sass :output-to \"css/sass.css\")"))))
 
 (defn production-task-opts [opts]
   (cond-> []
@@ -130,7 +129,7 @@
   {:name                   name
    :sanitized              (name-to-path name)
    :source-paths           (source-paths opts)
-   :deps                   (dep-list 18 (dependencies opts))
+   :deps                   (dep-list 17 (dependencies opts))
    :requires               (indent 1 (build-requires opts))
    :pre-build-steps        (indent 8 (pre-build-steps name opts))
    :build-steps            (indent 8 (build-steps name opts))
