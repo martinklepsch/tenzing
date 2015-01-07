@@ -1,6 +1,7 @@
 # Tenzing
 
-### Tenzing is still work in progress and might not work at all. Watch the project to be notified when it's ready.
+**Tenzing is still in an alpha state. If you encouter any problems
+opening an issue would be of great help!**
 
 Tenzing is a template for Clojurescript applications inspired by
 [Chestnut][chestnut]. Just like Chestnut it offers the following
