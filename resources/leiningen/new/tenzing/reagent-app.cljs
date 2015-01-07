@@ -1,35 +1,24 @@
 (ns {{name}}.app
   (:require [reagent.core :as reagent :refer [atom]]))
 
-(def timer (atom (js/Date.)))
-(def time-color (atom "#f34"))
-
-(defn update-time [time]
-  ;; Update the time every 1/10 second to be accurate...
-  (js/setTimeout #(reset! time (js/Date.)) 100))
-
-(defn greeting [message]
-  [:h1 message])
-
-(defn clock []
-  (update-time timer)
-  (let [time-str (-> @timer .toTimeString (clojure.string/split " ") first)]
-    [:div.example-clock
-     {:style {:color @time-color}}
-     time-str]))
-
-(defn color-input []
-  [:div.color-input
-   "Time color: "
-   [:input {:type "text"
-            :value @time-color
-            :on-change #(reset! time-color (-> % .-target .-value))}]])
-
-(defn simple-example []
+(defn some-component []
   [:div
-   [greeting "Hello world, it is now"]
-   [clock]
-   [color-input]])
+   [:h3 "I am a component!"]
+   [:p.someclass
+    "I have " [:strong "bold"]
+    [:span {:style {:color "red"}} " and red"]
+    " text."]])
 
-(reagent/render-component (fn [] [simple-example])
-                          (. js/document (getElementById "container")))
+(defn calling-component []
+  [:div "Parent component"
+   [some-component]])
+
+(defn child [name]
+  [:p "Hi, I am " name])
+
+(defn childcaller []
+  [child "Foo Bar"])
+
+(defn mountit []
+  (reagent/render-component [childcaller]
+                            (.getElementById js/document "container")))

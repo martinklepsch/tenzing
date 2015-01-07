@@ -2,14 +2,11 @@
   (:require [om.core :as om :include-macros true]
             [om.dom :as dom :include-macros true]))
 
-(enable-console-print!)
+(defn widget [data owner]
+  (reify
+    om/IRender
+    (render [this]
+      (dom/h1 nil (:text data)))))
 
-(def app-state (atom {:text "Hello world!"}))
-
-(om/root
-  (fn [app owner]
-    (reify om/IRender
-      (render [_]
-        (dom/h1 nil (:text app)))))
-  app-state
+(om/root widget {:text "Hello world!"}
   {:target (. js/document (getElementById "container"))})
