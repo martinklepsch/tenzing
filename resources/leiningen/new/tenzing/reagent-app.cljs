@@ -13,12 +13,5 @@
   [:div "Parent component"
    [some-component]])
 
-(defn child [name]
-  [:p "Hi, I am " name])
-
-(defn childcaller []
-  [child "Foo Bar"])
-
-(defn mountit []
-  (reagent/render-component [childcaller]
-                            (.getElementById js/document "container")))
+(reagent/render-component [childcaller]
+                          (.getElementById js/document "container"))
