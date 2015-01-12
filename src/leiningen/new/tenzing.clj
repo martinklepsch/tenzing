@@ -78,7 +78,7 @@
 
 (defn dependencies [opts]
   (cond-> []
-          (om?      opts) (conj "om \"0.8.0-rc1\"" "cljsjs/react \"0.12.2-3\"")
+          (om?      opts) (conj "om \"0.8.0-rc1\" :exclusions [com.facebook/react]" "cljsjs/react \"0.12.2-3\"")
           (reagent? opts) (conj "reagent \"0.4.3\"" "cljsjs/react \"0.12.2-3\"")
           (garden?  opts) (conj "boot-garden \"1.2.5-1\"")
           (sass?    opts) (conj "boot-sassc  \"0.1.0\"")
