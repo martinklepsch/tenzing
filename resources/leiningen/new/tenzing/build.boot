@@ -12,28 +12,31 @@
  '[adzerk.boot-reload    :refer [reload]]
  '[pandeiro.boot-http    :refer [serve]]{{{requires}}})
 
-(deftask run
-  ""
-  []
-  (comp (serve)
+(deftask build []
+  (comp (speak)
         {{{pre-build-steps}}}
-        (watch)
-        (speak)
-        (cljs-repl)
         (cljs :output-to "js/app.js")
-        {{{build-steps}}}
-        (reload)))
+        {{{build-steps}}}))
 
-(deftask production
-  ""
-  []
+(deftask run []
+  (comp (serve)
+        (watch)
+        (cljs-repl)
+        (reload)
+        (build)))
+
+(deftask production []
   (task-options! cljs {:optimizations :advanced}{{{production-task-opts}}})
-  (run))
+  identity)
 
-(deftask development
-  ""
-  []
+(deftask development []
   (task-options! cljs {:optimizations :none
                        :unified-mode true
                        :source-map true}{{{development-task-opts}}})
-  (run))
+  identity)
+
+(deftask dev
+  "Simple alias to run application in development mode"
+  []
+  (comp (development)
+        (run)))
