@@ -13,5 +13,5 @@
   [:div "Parent component"
    [some-component]])
 
-(reagent/render-component [childcaller]
+(reagent/render-component [calling-component]
                           (.getElementById js/document "container"))
