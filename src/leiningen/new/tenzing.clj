@@ -164,5 +164,6 @@
                                  (om? opts)      [app-cljs (render "om-app.cljs" data)]
                                  :none           [app-cljs (render "app.cljs" data)])
 
+                           ["resources/js/app.cljs.edn" (render "app.cljs.edn" data)]
                            ["resources/index.html" (render "index.html" data)]
                            ["build.boot" (render "build.boot" data)])))))

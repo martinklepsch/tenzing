@@ -13,5 +13,6 @@
   [:div "Parent component"
    [some-component]])
 
-(reagent/render-component [calling-component]
-                          (.getElementById js/document "container"))
+(defn init []
+  (reagent/render-component [calling-component]
+                            (.getElementById js/document "container")))
