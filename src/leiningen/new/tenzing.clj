@@ -101,7 +101,7 @@
 
 (defn production-task-opts [opts]
   (cond-> []
-          (cljsjs? opts) (conj (str "cljsjs {:profile :production}"))
+          (cljsjs? opts) (conj (str "from-cljsjs {:profile :production}"))
           (garden? opts) (conj (str "garden {:pretty-print false}"))
           (sass?   opts) (conj (str "sass   {:output-style \"compressed\"}"))))
 
