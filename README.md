@@ -58,6 +58,13 @@ After you [installed Boot](https://github.com/boot-clj/boot#install):
     $ boot dev
 
 After a moment of waiting you can head to [localhost:3000](http://localhost:3000) to see a small sample app.
+Please refer to the documentation of the actual tasks to get more information, how to connect to the REPL or change certain behaviour. (Or try `boot -h` or `boot 'taskname -h`)
+
+- [pandeiro/boot-http](https://github.com/pandeiro/boot-http)
+- [adzerk/boot-cljs](https://github.com/adzerk/boot-cljs)
+- [adzerk/boot-reload](https://github.com/adzerk/boot-reload)
+- [adzerk/boot-cljs-repl](https://github.com/adzerk/boot-cljs-repl)
+- [cljsjs/boot-cljsjs](https://github.com/cljsjs/boot-cljsjs)
 
 ### Options
 
