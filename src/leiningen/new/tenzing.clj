@@ -57,10 +57,6 @@
 (defn om? [opts]
   (some #{"+om"} opts))
 
-; derived option
-(defn cljsjs? [opts]
-  (or (om? opts) (reagent? opts)))
-
 (defn sass? [opts]
   (some #{"+sass"} opts))
 
@@ -78,21 +74,19 @@
 
 (defn dependencies [opts]
   (cond-> []
-          (om?      opts) (conj "om \"0.8.0-rc1\" :exclusions [com.facebook/react]" "cljsjs/react \"0.12.2-3\"")
-          (reagent? opts) (conj "reagent \"0.4.3\"" "cljsjs/react \"0.12.2-3\"")
+          (om?      opts) (conj "org.omcljs/om \"0.8.6\"")
+          (reagent? opts) (conj "reagent \"0.5.0-SNAPSHOT\"")
           (garden?  opts) (conj "boot-garden \"1.2.5-1\"")
-          (sass?    opts) (conj "boot-sassc  \"0.1.0\"")
-          (cljsjs?  opts) (conj "cljsjs/boot-cljsjs \"0.4.1\"")))
+          (sass?    opts) (conj "boot-sassc  \"0.1.0\"")))
 
 (defn build-requires [opts]
   (cond-> []
           (garden? opts) (conj "'[boot-garden.core :refer [garden]]")
-          (sass?   opts) (conj "'[boot-sassc.core  :refer [sass]]")
-          (cljsjs? opts) (conj "'[cljsjs.boot-cljsjs :refer [from-cljsjs]]")))
+          (sass?   opts) (conj "'[boot-sassc.core  :refer [sass]]")))
 
-(defn pre-build-steps [name opts]
-  (cond-> []
-          (cljsjs? opts) (conj (str "(from-cljsjs)"))))
+;; (defn pre-build-steps [name opts]
+;;   (cond-> []
+;;           ))
 
 (defn build-steps [name opts]
   (cond-> []
@@ -101,7 +95,6 @@
 
 (defn production-task-opts [opts]
   (cond-> []
-          (cljsjs? opts) (conj (str "from-cljsjs {:profile :production}"))
           (garden? opts) (conj (str "garden {:pretty-print false}"))
           (sass?   opts) (conj (str "sass   {:output-style \"compressed\"}"))))
 
@@ -119,11 +112,6 @@
 (defn index-html-script-tags [opts]
   (letfn [(script-tag [src] (str "<script type=\"text/javascript\" src=\"" src "\"></script>"))]
     (cond-> []
-            ; (or (om? opts) (reagent? opts))
-            ; the preamble can also be handled by boot-cljs'
-            ; unified-mode which will load any .inc.js files
-            ; in the shim it generates
-            false    (conj (script-tag "js/preamble.js"))
             :finally (conj (script-tag "js/app.js")))))
 
 (defn template-data [name opts]
@@ -132,7 +120,7 @@
    :source-paths           (source-paths opts)
    :deps                   (dep-list 17 (dependencies opts))
    :requires               (indent 1 (build-requires opts))
-   :pre-build-steps        (indent 8 (pre-build-steps name opts))
+   ;; :pre-build-steps        (indent 8 (pre-build-steps name opts))
    :build-steps            (indent 8 (build-steps name opts))
    :production-task-opts   (indent 22 (production-task-opts opts))
    :development-task-opts  (indent 22 (development-task-opts opts))
