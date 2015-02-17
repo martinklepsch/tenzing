@@ -1,8 +1,8 @@
 (set-env!
  :source-paths    {{{source-paths}}}
  :resource-paths  #{"resources"}
- :dependencies '[[adzerk/boot-cljs      "0.0-2760-0" :scope "test"]
-                 [adzerk/boot-cljs-repl "0.1.8"      :scope "test"]
+ :dependencies '[[adzerk/boot-cljs      "0.0-2814-0" :scope "test"]
+                 [adzerk/boot-cljs-repl "0.1.9"      :scope "test"]
                  [adzerk/boot-reload    "0.2.4"      :scope "test"]
                  [pandeiro/boot-http    "0.6.1"      :scope "test"]{{{deps}}}])
 
