@@ -75,7 +75,7 @@
 (defn dependencies [opts]
   (cond-> []
           (om?      opts) (conj "org.omcljs/om \"0.8.6\"")
-          (reagent? opts) (conj "reagent \"0.5.0-SNAPSHOT\"")
+          (reagent? opts) (conj "reagent \"0.5.0-alpha3\"")
           (garden?  opts) (conj "boot-garden \"1.2.5-1\"")
           (sass?    opts) (conj "boot-sassc  \"0.1.0\"")))
 
