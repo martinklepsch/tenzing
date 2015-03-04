@@ -63,6 +63,9 @@
 (defn garden? [opts]
   (some #{"+garden"} opts))
 
+(defn less? [opts]
+  (some #{"+less"} opts))
+
 ;; ---------------------------------------------------------------
 ;; Template data helpers
 ;; ---------------------------------------------------------------
@@ -70,19 +73,22 @@
 (defn source-paths [opts]
   (cond-> #{"src/cljs"}
           (garden? opts) (conj "src/clj")
-          (sass? opts)   (conj "sass")))
+          (sass? opts)   (conj "sass")
+          (less? opts)   (conj "less")))
 
 (defn dependencies [opts]
   (cond-> []
           (om?      opts) (conj "org.omcljs/om \"0.8.6\"")
           (reagent? opts) (conj "reagent \"0.5.0-alpha3\"")
           (garden?  opts) (conj "boot-garden \"1.2.5-1\"")
-          (sass?    opts) (conj "boot-sassc  \"0.1.0\"")))
+          (sass?    opts) (conj "mathias/boot-sassc  \"0.1.1\" :scope \"test\"")
+          (less?    opts) (conj "deraen/boot-less \"0.2.1\" :scope \"test\"")))
 
 (defn build-requires [opts]
   (cond-> []
-          (garden? opts) (conj "'[boot-garden.core :refer [garden]]")
-          (sass?   opts) (conj "'[boot-sassc.core  :refer [sass]]")))
+    (garden? opts) (conj "'[boot-garden.core    :refer [garden]]")
+    (sass?   opts) (conj "'[mathias.boot-sassc  :refer [sass]]")
+    (less?   opts) (conj "'[deraen.boot-less    :refer [less]]")))
 
 ;; (defn pre-build-steps [name opts]
 ;;   (cond-> []
@@ -91,23 +97,28 @@
 (defn build-steps [name opts]
   (cond-> []
           (garden? opts) (conj (str "(garden :styles-var '" name ".styles/screen\n:output-to \"css/garden.css\")"))
-          (sass?   opts) (conj (str "(sass :output-to \"css/sass.css\")"))))
+          (sass?   opts) (conj (str "(sass :output-dir \"css\")"))
+          (less?   opts) (conj (str "(less)"))
+          (less?   opts) (conj (str "(sift   :move {#\"styles.css\" \"css/styles.css\"})"))))
 
 (defn production-task-opts [opts]
   (cond-> []
           (garden? opts) (conj (str "garden {:pretty-print false}"))
-          (sass?   opts) (conj (str "sass   {:output-style \"compressed\"}"))))
+          (sass?   opts) (conj (str "sass   {:output-style \"compressed\"}"))
+          (less?   opts) (conj (str "less   {:compression true}"))))
 
 (defn development-task-opts [opts]
   (cond-> []
-          (sass? opts) (conj (str "sass   {:line-numbers true
-                                           :source-maps  true}"))))
+    (sass? opts) (conj (str "sass   {:line-numbers true
+                                     :source-maps  true}"))
+    (less? opts) (conj (str "less   {:source-map  true}"))))
 
 (defn index-html-head-tags [opts]
   (letfn [(style-tag [href] (str "<link href=\"" href "\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\">"))]
     (cond-> []
             (garden? opts) (conj (style-tag "css/garden.css"))
-            (sass? opts)   (conj (style-tag "css/sass.css")))))
+            (sass? opts)   (conj (style-tag "css/styles.css"))
+            (less? opts)   (conj (style-tag "css/styles.css")))))
 
 (defn index-html-script-tags [opts]
   (letfn [(script-tag [src] (str "<script type=\"text/javascript\" src=\"" src "\"></script>"))]
@@ -146,7 +157,9 @@
            (remove nil?
                    (vector (if (divshot? opts) ["divshot.json" (render "divshot.json" data)])
                            (if (garden? opts)  ["src/clj/{{sanitized}}/styles.clj" (render "styles.clj" data)])
-                           (if (sass? opts)    ["sass/styles.sass" (render "styles.sass" data)])
+                           (if (sass? opts)    ["sass/styles.scss" (render "styles.scss" data)])
+
+                           (if (less? opts)    ["less/styles.main.less" (render "styles.main.less" data)])
 
                            (cond (reagent? opts) [app-cljs (render "reagent-app.cljs" data)]
                                  (om? opts)      [app-cljs (render "om-app.cljs" data)]
