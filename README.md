@@ -73,8 +73,9 @@ Currently the following options are supported:
 - `+om` provides a basic Om application and adds relevant dependencies ✓
 - `+reagent` provides a basic Reagent application and adds relevant dependencies ✓
 - `+divshot` adds divshot.json for easy deployment to [Divshot](divshot) ✓
-- `+garden` sets up [Garden][garden] and integrates into build process ✓
-- `+sass` sets up [Sass][sass] and integrates into build process (requires [libsass][libsass])✓
+- `+garden` sets up [Garden][garden] and integrates into the build process ✓
+- `+sass` sets up [Sass][sass] and integrates into the build process (requires [libsass][libsass])✓
+- `+less` sets up [Less][less] and integrates into the build process.
 
 If you want to add an option, pull-requests are welcome. Please make
 sure your option doesn't interfere with existing ones. Also use boot
@@ -129,6 +130,7 @@ your option) any later version.
 [garden]: https://github.com/noprompt/garden
 [sass]: http://sass-lang.com
 [libsass]: http://libsass.org
+[less]: http://lesscss.org/
 [firebase-hosting]: https://www.firebase.com/docs/hosting/
 [divshot]: https://divshot.com
 [divshot-json]: https://github.com/martinklepsch/tenzing/blob/master/resources/leiningen/new/tenzing/divshot.json
