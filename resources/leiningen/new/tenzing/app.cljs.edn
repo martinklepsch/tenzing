@@ -1,2 +1,0 @@
-{:require  [{{name}}.app]
- :init-fns [{{name}}.app/init]}
