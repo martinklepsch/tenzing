@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Tenzing, the awesome Clojurescript application template</title>
-<!-- 2015-04-11 Sat 19:50 -->
+<!-- 2015-04-11 Sat 19:56 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Martin Klepsch" />
@@ -89,7 +89,6 @@
   /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="tenzing.css" />
-<link rel="stylesheet" type="text/css" href="tenzing.css" />
 <script type="text/javascript">
 /*
 @licstart  The following is the entire license notice for the
@@ -140,12 +139,6 @@ for the JavaScript code in this tag.
 <body>
 <div id="content">
 <h1 class="title">Tenzing, the awesome Clojurescript application template</h1>
-<p>
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-</p>
-<p>
-<code>=====</code>
-</p>
 <nav>
 <a class="toc-title" href="/">Tenzing</a>
 <div id="table-of-contents">
@@ -161,11 +154,9 @@ for the JavaScript code in this tag.
 </li>
 <li><a href="#sec-3">Usage</a>
 <ul>
-<li><a href="#sec-3-1">Creating a New Project</a></li>
-<li><a href="#sec-3-2">Create a Project</a></li>
-<li><a href="#sec-3-3">Running it</a></li>
-<li><a href="#sec-3-4">Deploying Your Project</a></li>
-<li><a href="#sec-3-5">Deployment</a></li>
+<li><a href="#sec-3-1">Create a Project</a></li>
+<li><a href="#sec-3-2">Running it</a></li>
+<li><a href="#sec-3-3">Deployment</a></li>
 </ul>
 </li>
 <li><a href="#sec-4">License</a></li>
@@ -173,27 +164,18 @@ for the JavaScript code in this tag.
 </div>
 </div>
 </nav>
-<p>
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; 8f5ba81&#x2026; change markdown readme to org-mode
-</p>
 
 <main>
 
 <div id="outline-container-sec-1" class="outline-2">
 <h2 id="sec-1">Tenzing, the awesome Clojurescript application template.</h2>
 <div class="outline-text-2" id="text-1">
-<p>
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-Being inspired by the awesome <a href="https://github.com/plexus/chestnut">Chestnut</a> template,
-<code>=====</code>
-</p>
 <!-- Place this tag where you want the button to render. -->
 <a class="github-button" href="https://github.com/martinklepsch/tenzing" data-style="mega" data-count-href="/martinklepsch/tenzing/stargazers" data-count-api="/repos/martinklepsch/tenzing#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star martinklepsch/tenzing on GitHub">Star</a>
 <!-- Place this tag right after the last button or just before your close body tag. -->
 <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
 <p>
 Being inspired by the, also awesome, <a href="https://github.com/plexus/chestnut">Chestnut</a> template
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; 8f5ba81&#x2026; change markdown readme to org-mode
 Tenzing offers the following features:
 </p>
 
@@ -207,11 +189,7 @@ Tenzing offers the following features:
 </ol>
 
 <p>
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-<b>There also are some differences:</b>
-<code>=====</code>
 <b>There are some significant differences though:</b>
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; 8f5ba81&#x2026; change markdown readme to org-mode
 </p>
 
 <ol class="org-ol">
@@ -238,11 +216,7 @@ Tenzing offers the following features:
 <p>
 In contrast to Leiningen Boot offers a clear strategy when it comes to
 composing multi-step build processes such as compiling stylesheets and
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-javascript whenever a relevant file changes.
-<code>=====</code>
 Javascript whenever a relevant file changes.
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; 8f5ba81&#x2026; change markdown readme to org-mode
 </p>
 
 <p>
@@ -293,23 +267,10 @@ a boot task `serve` that allows you to serve static files.
 <div id="outline-container-sec-3" class="outline-2">
 <h2 id="sec-3">Usage</h2>
 <div class="outline-text-2" id="text-3">
-<p>
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-</p>
-</div>
-<div id="outline-container-sec-3-1" class="outline-3">
-<h3 id="sec-3-1">Creating a New Project</h3>
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1">Create a Project</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
-<code>=====</code>
-</p>
-</div>
-</div>
-<div id="outline-container-sec-3-2" class="outline-3">
-<h3 id="sec-3-2">Create a Project</h3>
-<div class="outline-text-3" id="text-3-2">
-<p>
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; 8f5ba81&#x2026; change markdown readme to org-mode
 To create a new project we piggieback the existing <code>lein new</code> tooling:
 </p>
 
@@ -324,27 +285,6 @@ There are a bunch of options that determine what your newly created
 project will contain:
 </p>
 
-<p>
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-</p>
-<ul class="org-ul">
-<li><code>+om</code> provides a basic <a href="https://github.com/omcljs/om">Om</a> application and adds relevant dependencies ✓
-</li>
-<li><code>+reagent</code> provides a basic <a href="https://github.com/reagent-project/reagent">Reagent</a> application and adds relevant dependencies ✓
-</li>
-<li><code>+divshot</code> adds divshot.json for easy deployment to <a href="https://divshot.com">Divshot</a> ✓
-</li>
-<li><code>+garden</code> sets up <a href="https://github.com/noprompt/garden">Garden</a> and integrates into the build process ✓
-</li>
-<li><code>+sass</code> sets up <a href="http://sass-lang.com">Sass</a> and integrates into the build process (requires <a href="http://libsass.org">libsass</a>) ✓
-</li>
-<li><code>+less</code> sets up <a href="http://lesscss.org/">Less</a> and integrates into the build process. ✓
-</li>
-</ul>
-
-<p>
-<code>=====</code>
-</p>
 <ul class="org-ul">
 <li><code>+om</code> provides a basic <a href="https://github.com/omcljs/om">Om</a> application and adds relevant dependencies
 </li>
@@ -361,15 +301,14 @@ project will contain:
 </ul>
 
 <p>
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; 8f5ba81&#x2026; change markdown readme to org-mode
 If you want to add an option, <a href="https://github.com/martinklepsch/tenzing">pull-requests</a> are welcome.
 </p>
 </div>
 </div>
 
-<div id="outline-container-sec-3-3" class="outline-3">
-<h3 id="sec-3-3">Running it</h3>
-<div class="outline-text-3" id="text-3-3">
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2">Running it</h3>
+<div class="outline-text-3" id="text-3-2">
 <p>
 After you <a href="https://github.com/boot-clj/boot#install">installed Boot</a> you can run your Clojurescript application in
 "development mode" by executing the following:
@@ -390,17 +329,11 @@ will get pushed to the browser.
 </p>
 </div>
 
-<div id="outline-container-sec-3-3-1" class="outline-4">
-<h4 id="sec-3-3-1">Connecting to the browser REPL</h4>
-<div class="outline-text-4" id="text-3-3-1">
+<div id="outline-container-sec-3-2-1" class="outline-4">
+<h4 id="sec-3-2-1">Connecting to the browser REPL</h4>
+<div class="outline-text-4" id="text-3-2-1">
 <p>
 After you started your application with <code>boot dev</code> there will be a
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-line printed like the following: <code>nREPL server started on port 63518
-on host 0.0.0.0 - nrepl://0.0.0.0:63518</code>. This means there now is an
-nREPL server that you can connect to. You can do this with your favorite
-editor or just by running <code>boot repl --client</code> in the same directory.
-<code>=====</code>
 line printed like the following:
 </p>
 <pre class="example">
@@ -410,7 +343,6 @@ nREPL server started on port 63518 on host 0.0.0.0
 This means there now is an nREPL server that you can connect to. You
 can do this with your favorite editor or just by running <code>boot repl
 --client</code> in the same directory.
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; 8f5ba81&#x2026; change markdown readme to org-mode
 </p>
 
 <p>
@@ -425,9 +357,9 @@ print "test" in the console of your browser.
 </p>
 </div>
 </div>
-<div id="outline-container-sec-3-3-2" class="outline-4">
-<h4 id="sec-3-3-2">How it works</h4>
-<div class="outline-text-4" id="text-3-3-2">
+<div id="outline-container-sec-3-2-2" class="outline-4">
+<h4 id="sec-3-2-2">How it works</h4>
+<div class="outline-text-4" id="text-3-2-2">
 <p>
 If you look at the <code>build</code> and <code>run</code> tasks in the <code>build.boot</code> file of your
 newly created project you will see something like the following:
@@ -489,24 +421,14 @@ This is where the <code>run</code> task comes in:
 
 <p>
 <b>Please note that all tasks, except the one we defined ourselves have extensive documentation that you can view by running <code>boot &lt;taskname&gt; -h</code> (e.g. <code>boot cljs-repl -h</code>).</b>
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 </p>
 </div>
 </div>
 </div>
-<div id="outline-container-sec-3-4" class="outline-3">
-<h3 id="sec-3-4">Deploying Your Project</h3>
-<div class="outline-text-3" id="text-3-4">
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3">Deployment</h3>
+<div class="outline-text-3" id="text-3-3">
 <p>
-<code>=====</code>
-</p>
-</div>
-</div>
-<div id="outline-container-sec-3-5" class="outline-3">
-<h3 id="sec-3-5">Deployment</h3>
-<div class="outline-text-3" id="text-3-5">
-<p>
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; 8f5ba81&#x2026; change markdown readme to org-mode
 The easiest way to deploy your app is using <a href="https://divshot.com">Divshot</a>:
 </p>
 
@@ -571,7 +493,7 @@ your option) any later version.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Martin Klepsch</p>
-<p class="date">Created: 2015-04-11 Sat 19:50</p>
+<p class="date">Created: 2015-04-11 Sat 19:56</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.6)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
