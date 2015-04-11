@@ -1,0 +1,102 @@
+body {
+  margin: 0;
+  font-family: "Monda"; }
+
+a {
+  color: #4C2F2D;
+  transition: 0.2s;
+  text-decoration: underline;
+  border-bottom: 1px solid inherit; }
+
+code, pre {
+  font-family: "Fira Mono";
+  background-color: #eee;
+  border-radius: 2px; }
+
+code {
+  padding: 0 3px; }
+
+pre {
+  margin: 0.3em 0 0 0;
+  padding: 0.7em 1em;
+  border: none;
+  box-shadow: none; }
+
+#content > h1.title {
+  display: none; }
+
+nav, main {
+  z-index: 3; }
+
+nav {
+  font-family: "Fira Mono", 12pt;
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 260px;
+  padding-top: 55px;
+  box-shadow: inset -5px 0 12px rgba(0, 0, 0, 0.32); }
+  nav .toc-title {
+    color: #e74c3c;
+    margin-left: 40px;
+    text-transform: uppercase; }
+  nav #text-table-of-contents > ul:first-child > li:first-child {
+    display: none; }
+  nav ul {
+    list-style-type: none; }
+  nav ul ul {
+    -webkit-padding-start: 5px; }
+  nav h2 {
+    display: none; }
+  nav a {
+    color: white;
+    opacity: 0.6;
+    text-decoration: none; }
+    nav a:active, nav a:hover {
+      opacity: 1; }
+
+main {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 260px;
+  background: #fff;
+  padding: 40px 60px; }
+  main #sec-1 {
+    -webkit-margin-before: 0;
+    font-family: "Abril Fatface";
+    font-size: 2.4em; }
+  main > * {
+    max-width: 640px; }
+  main a:hover {
+    color: #e74c3c; }
+
+#bg {
+  position: fixed;
+  top: 0;
+  left: -80px;
+  right: 0;
+  bottom: -40px;
+  z-index: 1;
+  background: #282828 url("bg.jpg");
+  background-size: auto 100%; }
+
+blockquote:before {
+  content: "i";
+  font-family: "Fira Mono";
+  position: absolute;
+  color: #e74c3c;
+  opacity: 0.6;
+  margin: -12px 0 0 -35px;
+  font-size: 2.4em; }
+
+@media (max-width: 650px) {
+  nav {
+    display: none; }
+
+  main {
+    position: relative;
+    width: auto;
+    left: 0; } }
+
+/*# sourceMappingURL=tenzing.css.map */

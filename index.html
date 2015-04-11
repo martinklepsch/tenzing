@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>Tenzing, the awesome Clojurescript application template</title>
+<!-- 2015-04-11 Sat 19:50 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Martin Klepsch" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="tenzing.css" />
+<link rel="stylesheet" type="text/css" href="tenzing.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Tenzing, the awesome Clojurescript application template</h1>
+<p>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+</p>
+<p>
+<code>=====</code>
+</p>
+<nav>
+<a class="toc-title" href="/">Tenzing</a>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">Tenzing, the awesome Clojurescript application template.</a></li>
+<li><a href="#sec-2">Rationale</a>
+<ul>
+<li><a href="#sec-2-1">Why Boot?</a></li>
+<li><a href="#sec-2-2">Why #noBackend?</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">Usage</a>
+<ul>
+<li><a href="#sec-3-1">Creating a New Project</a></li>
+<li><a href="#sec-3-2">Create a Project</a></li>
+<li><a href="#sec-3-3">Running it</a></li>
+<li><a href="#sec-3-4">Deploying Your Project</a></li>
+<li><a href="#sec-3-5">Deployment</a></li>
+</ul>
+</li>
+<li><a href="#sec-4">License</a></li>
+</ul>
+</div>
+</div>
+</nav>
+<p>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 8f5ba81&#x2026; change markdown readme to org-mode
+</p>
+
+<main>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1">Tenzing, the awesome Clojurescript application template.</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+Being inspired by the awesome <a href="https://github.com/plexus/chestnut">Chestnut</a> template,
+<code>=====</code>
+</p>
+<!-- Place this tag where you want the button to render. -->
+<a class="github-button" href="https://github.com/martinklepsch/tenzing" data-style="mega" data-count-href="/martinklepsch/tenzing/stargazers" data-count-api="/repos/martinklepsch/tenzing#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star martinklepsch/tenzing on GitHub">Star</a>
+<!-- Place this tag right after the last button or just before your close body tag. -->
+<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+<p>
+Being inspired by the, also awesome, <a href="https://github.com/plexus/chestnut">Chestnut</a> template
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 8f5ba81&#x2026; change markdown readme to org-mode
+Tenzing offers the following features:
+</p>
+
+<ol class="org-ol">
+<li>Incremental Clojurescript compilation
+</li>
+<li>Live reloading of your Javascript, CSS, etc.
+</li>
+<li>Browser-REPL
+</li>
+</ol>
+
+<p>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+<b>There also are some differences:</b>
+<code>=====</code>
+<b>There are some significant differences though:</b>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 8f5ba81&#x2026; change markdown readme to org-mode
+</p>
+
+<ol class="org-ol">
+<li>Tenzing uses <a href="https://github.com/boot-clj/boot">Boot</a> instead of Leiningen (see below)
+</li>
+<li>Tenzing does not provide a backend layer (see below)
+</li>
+<li>Tenzing allows you to choose between Om, Reagent and others
+</li>
+</ol>
+
+<p>
+<b>Tenzing is work in progress, please <a href="https://github.com/martinklepsch/tenzing">report issues</a> as you encounter them!</b>
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2">Rationale</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1">Why Boot?</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+In contrast to Leiningen Boot offers a clear strategy when it comes to
+composing multi-step build processes such as compiling stylesheets and
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+javascript whenever a relevant file changes.
+<code>=====</code>
+Javascript whenever a relevant file changes.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 8f5ba81&#x2026; change markdown readme to org-mode
+</p>
+
+<p>
+Many Leinigen plugins come with an `auto` task that allows similar
+behavior. If you want to run multiple of those tasks it's usually done
+by starting multiple JVM instances which can lead to <a href="https://github.com/plexus/chestnut/issues/49">high memory
+usage</a>. Boot allows this sort of behaviour to reside in one JVM process
+while making sure that build steps don't interfere with each other.
+</p>
+
+<p>
+You can learn more about Boot in <a href="http://adzerk.com/blog/2014/11/clojurescript-builds-rebooted/">a blog post by one of the authors</a>,
+it's <a href="https://github.com/boot-clj/boot">github project</a> or <a href="http://www.martinklepsch.org/posts/why-boot-is-relevant-for-the-clojure-ecosystem.html">a blog post I wrote about it</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2">Why #noBackend?</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+Tenzing is designed with prototyping in mind. Instead of writing your
+own backend you're encouraged to use services like <a href="https://parse.com">Parse</a>, <a href="https://www.firebase.com">Firebase</a>,
+<a href="http://usergrid.incubator.apache.org">Usergrid</a> and others.
+</p>
+
+<p>
+If you figure out that you need a Clojure based backend down the road
+it's simple to either add it yourself or create it as a standalone
+service that's being used by your clients.
+</p>
+
+<p>
+Please, also consider <a href="http://alistapart.com/article/offline-first">offline first</a> as an approach for building early
+iterations of your application.
+</p>
+
+<blockquote>
+<p>
+If you're wondering how files are served during development: there is
+a boot task `serve` that allows you to serve static files.
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3">Usage</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+</p>
+</div>
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1">Creating a New Project</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+<code>=====</code>
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2">Create a Project</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 8f5ba81&#x2026; change markdown readme to org-mode
+To create a new project we piggieback the existing <code>lein new</code> tooling:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">$ lein new tenzing your-app
+</pre>
+</div>
+
+<p>
+There are a bunch of options that determine what your newly created
+project will contain:
+</p>
+
+<p>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+</p>
+<ul class="org-ul">
+<li><code>+om</code> provides a basic <a href="https://github.com/omcljs/om">Om</a> application and adds relevant dependencies ✓
+</li>
+<li><code>+reagent</code> provides a basic <a href="https://github.com/reagent-project/reagent">Reagent</a> application and adds relevant dependencies ✓
+</li>
+<li><code>+divshot</code> adds divshot.json for easy deployment to <a href="https://divshot.com">Divshot</a> ✓
+</li>
+<li><code>+garden</code> sets up <a href="https://github.com/noprompt/garden">Garden</a> and integrates into the build process ✓
+</li>
+<li><code>+sass</code> sets up <a href="http://sass-lang.com">Sass</a> and integrates into the build process (requires <a href="http://libsass.org">libsass</a>) ✓
+</li>
+<li><code>+less</code> sets up <a href="http://lesscss.org/">Less</a> and integrates into the build process. ✓
+</li>
+</ul>
+
+<p>
+<code>=====</code>
+</p>
+<ul class="org-ul">
+<li><code>+om</code> provides a basic <a href="https://github.com/omcljs/om">Om</a> application and adds relevant dependencies
+</li>
+<li><code>+reagent</code> provides a basic <a href="https://github.com/reagent-project/reagent">Reagent</a> application and adds relevant dependencies
+</li>
+<li><code>+divshot</code> adds divshot.json for easy deployment to <a href="https://divshot.com">Divshot</a>
+</li>
+<li><code>+garden</code> sets up <a href="https://github.com/noprompt/garden">Garden</a> and integrates into the build process
+</li>
+<li><code>+sass</code> sets up <a href="http://sass-lang.com">Sass</a> and integrates into the build process (requires <a href="http://libsass.org">libsass</a>)
+</li>
+<li><code>+less</code> sets up <a href="http://lesscss.org/">Less</a> and integrates into the build process.
+</li>
+</ul>
+
+<p>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 8f5ba81&#x2026; change markdown readme to org-mode
+If you want to add an option, <a href="https://github.com/martinklepsch/tenzing">pull-requests</a> are welcome.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3">Running it</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+After you <a href="https://github.com/boot-clj/boot#install">installed Boot</a> you can run your Clojurescript application in
+"development mode" by executing the following:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-sh">$ boot dev
+</pre>
+</div>
+
+<p>
+After a moment of waiting you can head to <a href="http://localhost:3000">localhost:3000</a> to see a
+small sample app. If you now go and edit one of the Clojurescript
+source files or a SASS file (if you've used the <code>+sass</code> option) this
+change will be picked up by Boot and the respective source file will
+get compiled. When a compiled file changes through that mechanism it
+will get pushed to the browser.
+</p>
+</div>
+
+<div id="outline-container-sec-3-3-1" class="outline-4">
+<h4 id="sec-3-3-1">Connecting to the browser REPL</h4>
+<div class="outline-text-4" id="text-3-3-1">
+<p>
+After you started your application with <code>boot dev</code> there will be a
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+line printed like the following: <code>nREPL server started on port 63518
+on host 0.0.0.0 - nrepl://0.0.0.0:63518</code>. This means there now is an
+nREPL server that you can connect to. You can do this with your favorite
+editor or just by running <code>boot repl --client</code> in the same directory.
+<code>=====</code>
+line printed like the following:
+</p>
+<pre class="example">
+nREPL server started on port 63518 on host 0.0.0.0
+</pre>
+<p>
+This means there now is an nREPL server that you can connect to. You
+can do this with your favorite editor or just by running <code>boot repl
+--client</code> in the same directory.
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 8f5ba81&#x2026; change markdown readme to org-mode
+</p>
+
+<p>
+Once you are connected you can get into a Clojurescript REPL by running
+<code>(start-repl)</code>. At this point I usually reload my browser one last time
+to make sure the REPL connection is properly setup.
+</p>
+
+<p>
+Now you can run things like <code>(.log js/console "test")</code>, which should
+print "test" in the console of your browser.
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3-3-2" class="outline-4">
+<h4 id="sec-3-3-2">How it works</h4>
+<div class="outline-text-4" id="text-3-3-2">
+<p>
+If you look at the <code>build</code> and <code>run</code> tasks in the <code>build.boot</code> file of your
+newly created project you will see something like the following:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-clojure">(deftask build []
+  (comp (speak)
+	(cljs)
+	(sass :output-dir "css")))
+
+(deftask run []
+  (comp (serve)
+	(watch)
+	(cljs-repl)
+	(reload)
+	(build)))
+</pre>
+</div>
+
+<p>
+Basically this composes all kinds of build steps into a unified <code>run</code> task
+that will start our application. From top to bottom:
+</p>
+
+<p>
+The <code>build</code> task consists of three other tasks:
+</p>
+<ul class="org-ul">
+<li><code>speak</code> gives us audible notifications about our build process
+</li>
+<li><code>cljs</code> will compile Clojurescript source files to Javascript
+</li>
+<li><code>sass</code> will compile Sass source files to CSS
+</li>
+</ul>
+
+<p>
+Now if we just run <code>boot build</code> instead of the aforementioned <code>boot dev</code>
+we will compile our Clojurescript and Sass exactly once and then the program
+will terminate.
+</p>
+
+<p>
+This is where the <code>run</code> task comes in:
+</p>
+<ul class="org-ul">
+<li><code>serve</code> starts a webserver that will serve our compiled JS, CSS and anything else that is in <code>resources/</code>
+</li>
+<li><code>watch</code> will watch our filesystem for changes and trigger new builds when they occur
+</li>
+<li><code>cljs-repl</code> sets up various things so we can connect to our application through a browser REPL
+</li>
+<li><code>reload</code> will watch the compiled files for changes and push them to the browser
+</li>
+<li><code>build</code> does the things already described above
+</li>
+</ul>
+
+<p>
+<b>Please note that all tasks, except the one we defined ourselves have extensive documentation that you can view by running <code>boot &lt;taskname&gt; -h</code> (e.g. <code>boot cljs-repl -h</code>).</b>
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4">Deploying Your Project</h3>
+<div class="outline-text-3" id="text-3-4">
+<p>
+<code>=====</code>
+</p>
+</div>
+</div>
+<div id="outline-container-sec-3-5" class="outline-3">
+<h3 id="sec-3-5">Deployment</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 8f5ba81&#x2026; change markdown readme to org-mode
+The easiest way to deploy your app is using <a href="https://divshot.com">Divshot</a>:
+</p>
+
+<ol class="org-ol">
+<li><code>$ divshot login</code>
+</li>
+<li>add <a href="https://github.com/martinklepsch/tenzing/blob/master/resources/leiningen/new/tenzing/divshot.json">divshot.json</a> (Only required if your project hasn't been created with the <code>+divshot</code> option.)
+<div class="org-src-container">
+
+<pre class="src src-json">{"name": "your-app",
+ "root": "target",
+ "clean_urls": true,
+ "error_page": "error.html"}
+</pre>
+</div>
+</li>
+<li><code>$ divshot push</code>
+</li>
+</ol>
+
+<p>
+Since Tenzing comes without a backend you can also easily deploy
+your app to Amazon S3 or even host it in your Dropbox. To do that
+just copy the files in <code>target/</code> to your desired location.
+</p>
+
+<blockquote>
+<p>
+PS. A nice tool to easily deploy to S3 from the command line is <a href="https://github.com/EagerIO/Stout">stout</a>.
+</p>
+</blockquote>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4">License</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Copyright © 2014 Martin Klepsch
+</p>
+
+<p>
+Distributed under the Eclipse Public License either version 1.0 or (at
+your option) any later version.
+</p>
+
+
+</main>
+
+<div id=bg></div>
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.10/webfont.js"></script>
+<script>
+  WebFont.load({
+    google: {
+      families: ['Abril Fatface', 'Fira Mono', 'Monda']
+    }
+  });
+</script>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Martin Klepsch</p>
+<p class="date">Created: 2015-04-11 Sat 19:50</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 24.4.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.6)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
