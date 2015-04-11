@@ -1,0 +1,203 @@
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="tenzing.css" />
+#+OPTIONS: num:nil toc:nil
+#+TITLE: Tenzing, the awesome Clojurescript application template
+
+
+#+BEGIN_HTML
+<nav>
+<a class="toc-title" href="/">Tenzing</a>
+#+END_HTML
+#+TOC: headlines 2
+#+BEGIN_HTML
+</nav>
+#+END_HTML
+
+#+BEGIN_HTML
+<main>
+#+END_HTML
+
+* Tenzing, the awesome Clojurescript application template.
+#+BEGIN_HTML
+<!-- Place this tag where you want the button to render. -->
+<a class="github-button" href="https://github.com/martinklepsch/tenzing" data-style="mega" data-count-href="/martinklepsch/tenzing/stargazers" data-count-api="/repos/martinklepsch/tenzing#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star martinklepsch/tenzing on GitHub">Star</a>
+<!-- Place this tag right after the last button or just before your close body tag. -->
+<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+#+END_HTML
+Being inspired by the, also awesome, [[https://github.com/plexus/chestnut][Chestnut]] template
+Tenzing offers the following features:
+
+1. Incremental Clojurescript compilation
+1. Live reloading of your Javascript, CSS, etc.
+1. Browser-REPL
+
+*There are some significant differences though:*
+
+1. Tenzing uses [[https://github.com/boot-clj/boot][Boot]] instead of Leiningen (see below)
+1. Tenzing does not provide a backend layer (see below)
+1. Tenzing allows you to choose between Om, Reagent and others
+
+*Tenzing is work in progress, please [[https://github.com/martinklepsch/tenzing][report issues]] as you encounter them!*
+
+* Rationale
+** Why Boot?
+In contrast to Leiningen Boot offers a clear strategy when it comes to
+composing multi-step build processes such as compiling stylesheets and
+Javascript whenever a relevant file changes.
+
+Many Leinigen plugins come with an `auto` task that allows similar
+behavior. If you want to run multiple of those tasks it's usually done
+by starting multiple JVM instances which can lead to [[https://github.com/plexus/chestnut/issues/49][high memory
+usage]]. Boot allows this sort of behaviour to reside in one JVM process
+while making sure that build steps don't interfere with each other.
+
+You can learn more about Boot in [[http://adzerk.com/blog/2014/11/clojurescript-builds-rebooted/][a blog post by one of the authors]],
+it's [[https://github.com/boot-clj/boot][github project]] or [[http://www.martinklepsch.org/posts/why-boot-is-relevant-for-the-clojure-ecosystem.html][a blog post I wrote about it]].
+
+** Why #noBackend?
+Tenzing is designed with prototyping in mind. Instead of writing your
+own backend you're encouraged to use services like [[https://parse.com][Parse]], [[https://www.firebase.com][Firebase]],
+[[http://usergrid.incubator.apache.org][Usergrid]] and others.
+
+If you figure out that you need a Clojure based backend down the road
+it's simple to either add it yourself or create it as a standalone
+service that's being used by your clients.
+
+Please, also consider [[http://alistapart.com/article/offline-first][offline first]] as an approach for building early
+iterations of your application.
+
+#+BEGIN_QUOTE
+If you're wondering how files are served during development: there is
+a boot task `serve` that allows you to serve static files.
+#+END_QUOTE
+
+* Usage
+** Create a Project
+To create a new project we piggieback the existing =lein new= tooling:
+
+#+BEGIN_SRC sh
+  $ lein new tenzing your-app
+#+END_SRC
+
+There are a bunch of options that determine what your newly created
+project will contain:
+
+- =+om= provides a basic [[https://github.com/omcljs/om][Om]] application and adds relevant dependencies
+- =+reagent= provides a basic [[https://github.com/reagent-project/reagent][Reagent]] application and adds relevant dependencies
+- =+divshot= adds divshot.json for easy deployment to [[https://divshot.com][Divshot]]
+- =+garden= sets up [[https://github.com/noprompt/garden][Garden]] and integrates into the build process
+- =+sass= sets up [[http://sass-lang.com][Sass]] and integrates into the build process (requires [[http://libsass.org][libsass]])
+- =+less= sets up [[http://lesscss.org/][Less]] and integrates into the build process.
+
+If you want to add an option, [[https://github.com/martinklepsch/tenzing][pull-requests]] are welcome.
+
+** Running it
+After you [[https://github.com/boot-clj/boot#install][installed Boot]] you can run your Clojurescript application in
+"development mode" by executing the following:
+#+BEGIN_SRC sh
+  $ boot dev
+#+END_SRC
+
+After a moment of waiting you can head to [[http://localhost:3000][localhost:3000]] to see a
+small sample app. If you now go and edit one of the Clojurescript
+source files or a SASS file (if you've used the =+sass= option) this
+change will be picked up by Boot and the respective source file will
+get compiled. When a compiled file changes through that mechanism it
+will get pushed to the browser.
+
+*** Connecting to the browser REPL
+After you started your application with =boot dev= there will be a
+line printed like the following:
+#+BEGIN_SRC
+nREPL server started on port 63518 on host 0.0.0.0
+#+END_SRC
+This means there now is an nREPL server that you can connect to. You
+can do this with your favorite editor or just by running =boot repl
+--client= in the same directory.
+
+Once you are connected you can get into a Clojurescript REPL by running
+=(start-repl)=. At this point I usually reload my browser one last time
+to make sure the REPL connection is properly setup.
+
+Now you can run things like =(.log js/console "test")=, which should
+print "test" in the console of your browser.
+*** How it works
+If you look at the =build= and =run= tasks in the =build.boot= file of your
+newly created project you will see something like the following:
+#+BEGIN_SRC clojure
+(deftask build []
+  (comp (speak)
+        (cljs)
+        (sass :output-dir "css")))
+
+(deftask run []
+  (comp (serve)
+        (watch)
+        (cljs-repl)
+        (reload)
+        (build)))
+#+END_SRC
+
+Basically this composes all kinds of build steps into a unified =run= task
+that will start our application. From top to bottom:
+
+The =build= task consists of three other tasks:
+- =speak= gives us audible notifications about our build process
+- =cljs= will compile Clojurescript source files to Javascript
+- =sass= will compile Sass source files to CSS
+
+Now if we just run =boot build= instead of the aforementioned =boot dev=
+we will compile our Clojurescript and Sass exactly once and then the program
+will terminate.
+
+This is where the =run= task comes in:
+- =serve= starts a webserver that will serve our compiled JS, CSS and anything else that is in =resources/=
+- =watch= will watch our filesystem for changes and trigger new builds when they occur
+- =cljs-repl= sets up various things so we can connect to our application through a browser REPL
+- =reload= will watch the compiled files for changes and push them to the browser
+- =build= does the things already described above
+
+*Please note that all tasks, except the one we defined ourselves have extensive documentation that you can view by running =boot <taskname> -h= (e.g. =boot cljs-repl -h=).*
+** Deployment
+The easiest way to deploy your app is using [[https://divshot.com][Divshot]]:
+
+1. =$ divshot login=
+1. add [[https://github.com/martinklepsch/tenzing/blob/master/resources/leiningen/new/tenzing/divshot.json][divshot.json]] (Only required if your project hasn't been created with the =+divshot= option.)
+   #+BEGIN_SRC json
+   {"name": "your-app",
+    "root": "target",
+    "clean_urls": true,
+    "error_page": "error.html"}
+   #+END_SRC
+1. =$ divshot push=
+
+Since Tenzing comes without a backend you can also easily deploy
+your app to Amazon S3 or even host it in your Dropbox. To do that
+just copy the files in =target/= to your desired location.
+
+#+BEGIN_QUOTE
+PS. A nice tool to easily deploy to S3 from the command line is [[https://github.com/EagerIO/Stout][stout]].
+#+END_QUOTE
+
+* License
+
+Copyright © 2014 Martin Klepsch
+
+Distributed under the Eclipse Public License either version 1.0 or (at
+your option) any later version.
+
+
+#+BEGIN_HTML
+</main>
+#+END_HTML
+
+#+BEGIN_HTML
+<div id=bg></div>
+<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.5.10/webfont.js"></script>
+<script>
+  WebFont.load({
+    google: {
+      families: ['Abril Fatface', 'Fira Mono', 'Monda']
+    }
+  });
+</script>
+#+END_HTML
