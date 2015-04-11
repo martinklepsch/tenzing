@@ -1,19 +1,49 @@
+<<<<<<< HEAD
 #+HTML_HEAD_EXTRA: <link rel="stylesheet" type="text/css" href="tenzing.css" />
 #+OPTIONS: num:0
+=======
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="tenzing.css" />
+#+OPTIONS: num:nil toc:nil
+#+TITLE: Tenzing, the awesome Clojurescript application template
+
+
+#+BEGIN_HTML
+<nav>
+<a class="toc-title" href="/">Tenzing</a>
+#+END_HTML
+#+TOC: headlines 2
+#+BEGIN_HTML
+</nav>
+#+END_HTML
+>>>>>>> 8f5ba81... change markdown readme to org-mode
 
 #+BEGIN_HTML
 <main>
 #+END_HTML
 
 * Tenzing, the awesome Clojurescript application template.
+<<<<<<< HEAD
 Being inspired by the awesome [[https://github.com/plexus/chestnut][Chestnut]] template,
+=======
+#+BEGIN_HTML
+<!-- Place this tag where you want the button to render. -->
+<a class="github-button" href="https://github.com/martinklepsch/tenzing" data-style="mega" data-count-href="/martinklepsch/tenzing/stargazers" data-count-api="/repos/martinklepsch/tenzing#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star martinklepsch/tenzing on GitHub">Star</a>
+<!-- Place this tag right after the last button or just before your close body tag. -->
+<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+#+END_HTML
+Being inspired by the, also awesome, [[https://github.com/plexus/chestnut][Chestnut]] template
+>>>>>>> 8f5ba81... change markdown readme to org-mode
 Tenzing offers the following features:
 
 1. Incremental Clojurescript compilation
 1. Live reloading of your Javascript, CSS, etc.
 1. Browser-REPL
 
+<<<<<<< HEAD
 *There also are some differences:*
+=======
+*There are some significant differences though:*
+>>>>>>> 8f5ba81... change markdown readme to org-mode
 
 1. Tenzing uses [[https://github.com/boot-clj/boot][Boot]] instead of Leiningen (see below)
 1. Tenzing does not provide a backend layer (see below)
@@ -25,7 +55,11 @@ Tenzing offers the following features:
 ** Why Boot?
 In contrast to Leiningen Boot offers a clear strategy when it comes to
 composing multi-step build processes such as compiling stylesheets and
+<<<<<<< HEAD
 javascript whenever a relevant file changes.
+=======
+Javascript whenever a relevant file changes.
+>>>>>>> 8f5ba81... change markdown readme to org-mode
 
 Many Leinigen plugins come with an `auto` task that allows similar
 behavior. If you want to run multiple of those tasks it's usually done
@@ -54,7 +88,11 @@ a boot task `serve` that allows you to serve static files.
 #+END_QUOTE
 
 * Usage
+<<<<<<< HEAD
 ** Creating a New Project
+=======
+** Create a Project
+>>>>>>> 8f5ba81... change markdown readme to org-mode
 To create a new project we piggieback the existing =lein new= tooling:
 
 #+BEGIN_SRC sh
@@ -64,6 +102,7 @@ To create a new project we piggieback the existing =lein new= tooling:
 There are a bunch of options that determine what your newly created
 project will contain:
 
+<<<<<<< HEAD
 - =+om= provides a basic [[https://github.com/omcljs/om][Om]] application and adds relevant dependencies ✓
 - =+reagent= provides a basic [[https://github.com/reagent-project/reagent][Reagent]] application and adds relevant dependencies ✓
 - =+divshot= adds divshot.json for easy deployment to [[https://divshot.com][Divshot]] ✓
@@ -71,6 +110,15 @@ project will contain:
 - =+sass= sets up [[http://sass-lang.com][Sass]] and integrates into the build process (requires [[http://libsass.org][libsass]]) ✓
 - =+less= sets up [[http://lesscss.org/][Less]] and integrates into the build process. ✓
   
+=======
+- =+om= provides a basic [[https://github.com/omcljs/om][Om]] application and adds relevant dependencies
+- =+reagent= provides a basic [[https://github.com/reagent-project/reagent][Reagent]] application and adds relevant dependencies
+- =+divshot= adds divshot.json for easy deployment to [[https://divshot.com][Divshot]]
+- =+garden= sets up [[https://github.com/noprompt/garden][Garden]] and integrates into the build process
+- =+sass= sets up [[http://sass-lang.com][Sass]] and integrates into the build process (requires [[http://libsass.org][libsass]])
+- =+less= sets up [[http://lesscss.org/][Less]] and integrates into the build process.
+
+>>>>>>> 8f5ba81... change markdown readme to org-mode
 If you want to add an option, [[https://github.com/martinklepsch/tenzing][pull-requests]] are welcome.
 
 ** Running it
@@ -89,10 +137,20 @@ will get pushed to the browser.
 
 *** Connecting to the browser REPL
 After you started your application with =boot dev= there will be a
+<<<<<<< HEAD
 line printed like the following: =nREPL server started on port 63518
 on host 0.0.0.0 - nrepl://0.0.0.0:63518=. This means there now is an
 nREPL server that you can connect to. You can do this with your favorite
 editor or just by running =boot repl --client= in the same directory.
+=======
+line printed like the following:
+#+BEGIN_SRC
+nREPL server started on port 63518 on host 0.0.0.0
+#+END_SRC
+This means there now is an nREPL server that you can connect to. You
+can do this with your favorite editor or just by running =boot repl
+--client= in the same directory.
+>>>>>>> 8f5ba81... change markdown readme to org-mode
 
 Once you are connected you can get into a Clojurescript REPL by running
 =(start-repl)=. At this point I usually reload my browser one last time
@@ -137,7 +195,11 @@ This is where the =run= task comes in:
 - =build= does the things already described above
 
 *Please note that all tasks, except the one we defined ourselves have extensive documentation that you can view by running =boot <taskname> -h= (e.g. =boot cljs-repl -h=).*
+<<<<<<< HEAD
 ** Deploying Your Project
+=======
+** Deployment
+>>>>>>> 8f5ba81... change markdown readme to org-mode
 The easiest way to deploy your app is using [[https://divshot.com][Divshot]]:
 
 1. =$ divshot login=
