@@ -167,4 +167,5 @@
 
                            ["resources/js/app.cljs.edn" (render "app.cljs.edn" data)]
                            ["resources/index.html" (render "index.html" data)]
-                           ["build.boot" (render "build.boot" data)])))))
+                           ["build.boot" (render "build.boot" data)]
+                           [".gitignore" (render "gitignore" data)])))))
