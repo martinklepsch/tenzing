@@ -26,11 +26,7 @@
         (build)))
 
 (deftask production []
-  (task-options! cljs {:optimizations :advanced
-                       ;; pseudo-names true is currently required
-                       ;; https://github.com/martinklepsch/pseudo-names-error
-                       ;; hopefully fixed soon
-                       :pseudo-names true}{{{production-task-opts}}})
+  (task-options! cljs {:optimizations :advanced}{{{production-task-opts}}})
   identity)
 
 (deftask development []
