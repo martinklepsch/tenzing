@@ -80,13 +80,13 @@
   (cond-> []
           (om?      opts) (conj "org.omcljs/om \"0.8.6\"")
           (reagent? opts) (conj "reagent \"0.5.0\"")
-          (garden?  opts) (conj "boot-garden \"1.2.5-1\" :scope \"test\"")
+          (garden?  opts) (conj "org.martinklepsch/boot-garden \"1.2.5-3\" :scope \"test\"")
           (sass?    opts) (conj "mathias/boot-sassc  \"0.1.1\" :scope \"test\"")
           (less?    opts) (conj "deraen/boot-less \"0.2.1\" :scope \"test\"")))
 
 (defn build-requires [opts]
   (cond-> []
-          (garden? opts) (conj "'[boot-garden.core    :refer [garden]]")
+          (garden? opts) (conj "'[org.martinklepsch.boot-garden :refer [garden]]")
           (sass?   opts) (conj "'[mathias.boot-sassc  :refer [sass]]")
           (less?   opts) (conj "'[deraen.boot-less    :refer [less]]")))
 
