@@ -3,8 +3,8 @@
  :resource-paths  #{"resources"}
  :dependencies '[[adzerk/boot-cljs      "0.0-2814-4" :scope "test"]
                  [adzerk/boot-cljs-repl "0.1.9"      :scope "test"]
-                 [adzerk/boot-reload    "0.2.4"      :scope "test"]
-                 [pandeiro/boot-http    "0.6.1"      :scope "test"]{{{deps}}}])
+                 [adzerk/boot-reload    "0.3.1"      :scope "test"]
+                 [pandeiro/boot-http    "0.6.2"      :scope "test"]{{{deps}}}])
 
 (require
  '[adzerk.boot-cljs      :refer [cljs]]
