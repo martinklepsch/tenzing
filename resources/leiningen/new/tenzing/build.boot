@@ -41,3 +41,5 @@
   []
   (comp (development)
         (run)))
+
+{{{tasks}}}
