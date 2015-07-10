@@ -2,7 +2,8 @@
   (:require [leiningen.new.templates :as t :refer [name-to-path ->files sanitize slurp-resource]]
             [leiningen.core.main :as main]
             [clojure.string :as string]
-            [clojure.java.io :as io]))
+            [clojure.java.io :as io]
+            [clojure.java.shell :as sh]))
 
 
 ;; potentially write a function here that can be called like (prettify
@@ -146,6 +147,12 @@
     (main/warn "Please specify only +om or +reagent, not both.")
     (main/exit)))
 
+(defn render-boot-properties []
+  (let [{:keys [exit out err]} (sh/sh "boot" "-V")]
+    (if (pos? exit)
+      (println "WARNING: unable to produce boot.properties file.")
+      out)))
+
 (defn tenzing
   "Main function to generate new tenzing project."
   [name & opts]
@@ -167,5 +174,9 @@
 
                            ["resources/js/app.cljs.edn" (render "app.cljs.edn" data)]
                            ["resources/index.html" (render "index.html" data)]
+
+                           (when-let [boot-props (render-boot-properties)]
+                             ["boot.properties" boot-props])
+
                            ["build.boot" (render "build.boot" data)]
                            [".gitignore" (render "gitignore" data)])))))
