@@ -148,7 +148,7 @@
     (main/exit)))
 
 (defn render-boot-properties []
-  (let [{:keys [exit out err]} (sh/sh "boot" "-V")]
+  (let [{:keys [exit out err]} (sh/sh "boot" "-V" :env {:BOOT_CLOJURE_VERSION "1.7.0"})]
     (if (pos? exit)
       (println "WARNING: unable to produce boot.properties file.")
       out)))
