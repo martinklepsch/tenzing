@@ -87,6 +87,7 @@ project will contain:
 - =+garden= sets up [[https://github.com/noprompt/garden][Garden]] and integrates into the build process
 - =+sass= sets up [[http://sass-lang.com][Sass]] and integrates into the build process (requires [[http://libsass.org][libsass]])
 - =+less= sets up [[http://lesscss.org/][Less]] and integrates into the build process.
+- =+test= adds a [[https://github.com/crisptrutski/boot-cljs-test][cljs test-runner]] and adds a =test= task.
 
 If you want to add an option, [[https://github.com/martinklepsch/tenzing][pull-requests]] are welcome.
 
