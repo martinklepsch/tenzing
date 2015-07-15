@@ -107,6 +107,11 @@
 
 (deftask test []
   (comp (testing)
+        (test-cljs :js-env :rhino)))
+
+(deftask auto-test []
+  (comp (testing)
+        (watch)
         (test-cljs :js-env :rhino)))")
 
 (defn build-tasks [opts]

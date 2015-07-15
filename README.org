@@ -105,6 +105,10 @@ change will be picked up by Boot and the respective source file will
 get compiled. When a compiled file changes through that mechanism it
 will get pushed to the browser.
 
+If you've use the =+test= option, then you'll be able to run
+unit tests via =boot test=. Use =boot auto-test= to
+have tests automatically rerun on file changes.
+
 *** Connecting to the browser REPL
 After you started your application with =boot dev= there will be a
 line printed like the following:
