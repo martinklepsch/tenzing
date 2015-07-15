@@ -100,6 +100,11 @@
   (set-env! :source-paths #(conj % \"test/cljs\"))
   identity)
 
+;;; This prevents a name collision WARNING between the test task and
+;;; clojure.core/test, a function that nobody really uses or cares
+;;; about.
+(ns-unmap 'boot.user 'test)
+
 (deftask test []
   (comp (testing)
         (test-cljs :js-env :rhino)))")
