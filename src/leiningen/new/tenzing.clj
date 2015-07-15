@@ -5,7 +5,6 @@
             [clojure.java.io :as io]
             [clojure.java.shell :as sh]))
 
-
 ;; potentially write a function here that can be called like (prettify
 ;; (render ...))  which goes through the files forms and pprints each
 ;; toplevel form separated by a blank line
@@ -67,6 +66,9 @@
 (defn less? [opts]
   (some #{"+less"} opts))
 
+(defn test? [opts]
+  (some #{"+test"} opts))
+
 ;; ---------------------------------------------------------------
 ;; Template data helpers
 ;; ---------------------------------------------------------------
@@ -79,6 +81,7 @@
 
 (defn dependencies [opts]
   (cond-> []
+          (test?    opts) (conj "crisptrutski/boot-cljs-test \"0.1.0-SNAPSHOT\"")
           (om?      opts) (conj "org.omcljs/om \"0.8.6\"")
           (reagent? opts) (conj "reagent \"0.5.0\"")
           (garden?  opts) (conj "org.martinklepsch/boot-garden \"1.2.5-3\" :scope \"test\"")
@@ -87,9 +90,23 @@
 
 (defn build-requires [opts]
   (cond-> []
+          (test?   opts) (conj "'[crisptrutski.boot-cljs-test :refer [test-cljs]]")
           (garden? opts) (conj "'[org.martinklepsch.boot-garden :refer [garden]]")
           (sass?   opts) (conj "'[mathias.boot-sassc  :refer [sass]]")
           (less?   opts) (conj "'[deraen.boot-less    :refer [less]]")))
+
+(def test-tasks
+"(deftask testing []
+  (set-env! :source-paths #(conj % \"test/cljs\"))
+  identity)
+
+(deftask test []
+  (comp (testing)
+        (test-cljs :js-env :rhino)))")
+
+(defn build-tasks [opts]
+  (cond-> []
+          (test? opts) (conj test-tasks)))
 
 ;; (defn pre-build-steps [name opts]
 ;;   (cond-> []
@@ -130,6 +147,7 @@
   {:name                   name
    :sanitized              (name-to-path name)
    :source-paths           (source-paths opts)
+   :tasks                  (indent 0 (build-tasks opts))
    :deps                   (dep-list 17 (dependencies opts))
    :requires               (indent 1 (build-requires opts))
    ;; :pre-build-steps        (indent 8 (pre-build-steps name opts))
@@ -165,6 +183,8 @@
                    (vector (if (divshot? opts) ["divshot.json" (render "divshot.json" data)])
                            (if (garden? opts)  ["src/clj/{{sanitized}}/styles.clj" (render "styles.clj" data)])
                            (if (sass? opts)    ["sass/sass.scss" (render "sass.scss" data)])
+
+                           (if (test? opts)    ["test/cljs/{{sanitized}}/app_test.cljs" (render "app_test.cljs" data)])
 
                            (if (less? opts)    ["less/less.main.less" (render "less.main.less" data)])
 
