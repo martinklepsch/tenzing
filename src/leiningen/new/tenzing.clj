@@ -107,7 +107,8 @@
 
 (deftask test []
   (comp (testing)
-        (test-cljs :js-env :rhino)))
+        (test-cljs :js-env :rhino
+                   :exit?  true)))
 
 (deftask auto-test []
   (comp (testing)
