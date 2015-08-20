@@ -107,13 +107,13 @@
 
 (deftask test []
   (comp (testing)
-        (test-cljs :js-env :phantomjs
+        (test-cljs :js-env :phantom
                    :exit?  true)))
 
 (deftask auto-test []
   (comp (testing)
         (watch)
-        (test-cljs :js-env :phantomjs)))")
+        (test-cljs :js-env :phantom)))")
 
 (defn build-tasks [opts]
   (cond-> []
