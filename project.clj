@@ -1,4 +1,4 @@
-(defproject tenzing/lein-template "0.3.3"
+(defproject tenzing/lein-template "0.3.4"
   :description "Clojurescript application template built on Boot"
   :url "http://github.com/martinklepsch/tenzing"
   :license {:name "Eclipse Public License"
