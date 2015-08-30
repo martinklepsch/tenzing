@@ -1,4 +1,4 @@
-# Tenzing, the awesome Clojurescript application template. ![Get help on Clojureverse](https://img.shields.io/badge/tenzing-clojureverse-green.svg)
+# Tenzing, the awesome Clojurescript application template. [![Get help on Clojureverse](https://img.shields.io/badge/tenzing-clojureverse-green.svg)](http://clojureverse.org/c/tenzing)
 
 Tenzing is a [Chestnut](https://github.com/plexus/chestnut)-inspired
 Clojurescript template offering the following features:
@@ -12,10 +12,6 @@ Clojurescript template offering the following features:
 1.  Tenzing uses [Boot](https://github.com/boot-clj/boot) instead of Leiningen (see below)
 2.  Tenzing does not provide a backend layer (see below)
 3.  Tenzing allows you to choose between Om, Reagent and others
-
-**Tenzing is work in progress, please
-  [report issues](https://github.com/martinklepsch/tenzing) as you
-  encounter them!**
 
 # Rationale
 
