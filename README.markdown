@@ -125,10 +125,12 @@ print "test" in the console of your browser.
 If you look at the `build` and `run` tasks in the `build.boot` file of
 your newly created project you will see something like the following:
 
-    (deftask build [] (comp (speak) (cljs) (sass :output-dir "css")))
+```clojure
+(deftask build [] (comp (speak) (cljs) (sass :output-dir "css")))
 
-    (deftask run [] (comp (serve) (watch) (cljs-repl) (reload)
-      (build)))
+(deftask run [] (comp (serve) (watch) (cljs-repl) (reload)
+    (build)))
+```
 
 Basically this composes all kinds of build steps into a unified `run`
 task that will start our application. From top to bottom:
