@@ -33,6 +33,7 @@
 (deftask development []
   (task-options! cljs {:optimizations :none
                        :unified-mode true
+                       :compiler-options {:asset-path "js/app.out"}
                        :source-map true}
                  reload {:on-jsload '{{name}}.app/init}{{{development-task-opts}}})
   identity)
