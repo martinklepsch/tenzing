@@ -1,2 +1,3 @@
 {:require  [{{name}}.app]
- :init-fns [{{name}}.app/init]}
+ :init-fns [{{name}}.app/init]
+ :compiler-options {:asset-path "js/app.out"}}
