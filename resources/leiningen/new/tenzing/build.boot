@@ -1,11 +1,11 @@
 (set-env!
  :source-paths    {{{source-paths}}}
  :resource-paths  #{"resources"}
- :dependencies '[[adzerk/boot-cljs          "0.0-3308-0" :scope "test"]
                  [adzerk/boot-cljs-repl     "0.1.9"      :scope "test"]
                  [adzerk/boot-reload        "0.3.1"      :scope "test"]
+ :dependencies '[[adzerk/boot-cljs          "1.7.48-6"   :scope "test"]
                  [pandeiro/boot-http        "0.6.3"      :scope "test"]
-                 [org.clojure/clojurescript "1.7.58"]{{{deps}}}])
+                 [org.clojure/clojurescript "1.7.122"]{{{deps}}}])
 
 (require
  '[adzerk.boot-cljs      :refer [cljs]]
