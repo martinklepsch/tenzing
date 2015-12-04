@@ -78,7 +78,7 @@
 
 (defn dependencies [opts]
   (cond-> []
-          (test?    opts) (conj "crisptrutski/boot-cljs-test \"0.1.0-SNAPSHOT\" :scope \"test\"")
+          (test?    opts) (conj "crisptrutski/boot-cljs-test \"0.2.0-SNAPSHOT\" :scope \"test\"")
           (om?      opts) (conj "org.omcljs/om \"0.8.6\"")
           (reagent? opts) (conj "reagent \"0.5.0\"")
           (garden?  opts) (conj "org.martinklepsch/boot-garden \"1.2.5-3\" :scope \"test\"")
