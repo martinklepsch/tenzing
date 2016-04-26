@@ -45,11 +45,8 @@
   (wrap-indent identity n list))
 
 ; ---------------------------------------------------------------
-; Options - currently: divshot, reagent, om, sass, garden
+; Options - currently: reagent, om, sass, garden
 ; ---------------------------------------------------------------
-
-(defn divshot? [opts]
-  (some #{"+divshot"} opts))
 
 (defn reagent? [opts]
   (some #{"+reagent"} opts))
@@ -191,8 +188,7 @@
     (warn-on-exclusive-opts! opts)
     (apply (partial ->files data)
            (remove nil?
-                   (vector (if (divshot? opts) ["divshot.json" (render "divshot.json" data)])
-                           (if (garden? opts)  ["src/clj/{{sanitized}}/styles.clj" (render "styles.clj" data)])
+                   (vector (if (garden? opts)  ["src/clj/{{sanitized}}/styles.clj" (render "styles.clj" data)])
                            (if (sass? opts)    ["sass/sass.scss" (render "sass.scss" data)])
 
                            (if (test? opts)    ["test/cljs/{{sanitized}}/app_test.cljs" (render "app_test.cljs" data)])
