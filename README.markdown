@@ -161,22 +161,7 @@ This is where the `run` task comes in:
 
 ## Deployment
 
-The easiest way to deploy your app is using
-[Divshot](https://divshot.com):
-
-1.  `$ divshot login`
-2.  add
-    [divshot.json](https://github.com/martinklepsch/tenzing/blob/master/resources/leiningen/new/tenzing/divshot.json)
-    (Only required if your project hasn't been created with the
-    `+divshot` option.)
-
-        {"name": "your-app",
-         "root": "target",
-         "clean_urls": true,
-         "error_page": "error.html"}
-3.  `$ divshot push`
-
-Since Tenzing comes without a backend you can also easily deploy your
+Since Tenzing comes without a backend you can easily deploy your
 app to Amazon S3 or even host it in your Dropbox. To do that just copy
 the files in `target/` to your desired location.
 
