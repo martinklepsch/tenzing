@@ -125,7 +125,8 @@
           (garden? opts) (conj (str "(garden :styles-var '" name ".styles/screen\n:output-to \"css/garden.css\")"))
           (sass?   opts) (conj (str "(sass :output-dir \"css\")"))
           (less?   opts) (conj (str "(less)"))
-          (less?   opts) (conj (str "(sift   :move {#\"less.css\" \"css/less.css\" #\"less.main.css.map\" \"css/less.main.css.map\"})"))))
+          (less?   opts) (conj (str "(sift   :move {#\"less.css\" \"css/less.css\" #\"less.main.css.map\" \"css/less.main.css.map\"})"))
+          true           (conj (str "(target :dir #{\"target\"})"))))
 
 (defn production-task-opts [opts]
   (cond-> []
@@ -179,6 +180,13 @@
       (println "WARNING: unable to produce boot.properties file.")
       out)))
 
+(defn silence-implicit-target-warning [boot-props]
+  (let [line-sep (System/getProperty "line.separator")]
+    (string/join line-sep 
+                 (conj (string/split (render-boot-properties) 
+                                     (re-pattern line-sep)) 
+                       (str "BOOT_EMIT_TARGET=no" line-sep)))))
+
 (defn tenzing
   "Main function to generate new tenzing project."
   [name & opts]
@@ -203,7 +211,7 @@
                            ["resources/index.html" (render "index.html" data)]
 
                            (when-let [boot-props (render-boot-properties)]
-                             ["boot.properties" boot-props])
+                             ["boot.properties" (silence-implicit-target-warning boot-props)])
 
                            ["build.boot" (render "build.boot" data)]
                            [".gitignore" (render "gitignore" data)])))))
