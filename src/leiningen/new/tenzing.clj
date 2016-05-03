@@ -179,6 +179,22 @@
       (println "WARNING: unable to produce boot.properties file.")
       out)))
 
+(def warn-sass-missing
+  "Libsass was not detected on your machine. Please note that builds will fail until you configure a SASS compiler like sassc and place it in your PATH variable.")
+
+(defn sass-missing? [opts]
+  (and (sass? opts) (pos? (:exit (sh/sh "sassc" :in " ")))))
+
+(def env-tests
+  {sass? warn-sass-missing})
+
+(defn warn-on-env-issues! [opts]
+  (doseq [[fail? warning] env-tests]
+    (when (fail? opts)
+      (print "\n")
+      (println warning)
+      (print "\n"))))
+
 (defn tenzing
   "Main function to generate new tenzing project."
   [name & opts]
@@ -186,6 +202,7 @@
         app-cljs "src/cljs/{{sanitized}}/app.cljs"]
     (main/info "Generating fresh 'lein new' tenzing project.")
     (warn-on-exclusive-opts! opts)
+    (warn-on-env-issues! opts)
     (apply (partial ->files data)
            (remove nil?
                    (vector (if (garden? opts)  ["src/clj/{{sanitized}}/styles.clj" (render "styles.clj" data)])
