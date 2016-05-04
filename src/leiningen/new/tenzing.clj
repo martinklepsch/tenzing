@@ -82,14 +82,15 @@
           (om?      opts) (conj "org.omcljs/om \"0.8.6\"")
           (reagent? opts) (conj "reagent \"0.5.0\"")
           (garden?  opts) (conj "org.martinklepsch/boot-garden \"1.2.5-3\" :scope \"test\"")
-          (sass?    opts) (conj "mathias/boot-sassc  \"0.1.1\" :scope \"test\"")
+          (sass?    opts) (conj "deraen/boot-sass  \"0.2.1\" :scope \"test\"")
+          (sass?    opts) (conj "org.slf4j/slf4j-nop  \"1.7.13\" :scope \"test\"")
           (less?    opts) (conj "deraen/boot-less \"0.2.1\" :scope \"test\"")))
 
 (defn build-requires [opts]
   (cond-> []
           (test?   opts) (conj "'[crisptrutski.boot-cljs-test :refer [test-cljs]]")
           (garden? opts) (conj "'[org.martinklepsch.boot-garden :refer [garden]]")
-          (sass?   opts) (conj "'[mathias.boot-sassc  :refer [sass]]")
+          (sass?   opts) (conj "'[deraen.boot-sass    :refer [sass]]")
           (less?   opts) (conj "'[deraen.boot-less    :refer [less]]")))
 
 (def test-tasks
@@ -123,20 +124,18 @@
 (defn build-steps [name opts]
   (cond-> []
           (garden? opts) (conj (str "(garden :styles-var '" name ".styles/screen\n:output-to \"css/garden.css\")"))
-          (sass?   opts) (conj (str "(sass :output-dir \"css\")"))
+          (sass?   opts) (conj (str "(sass)"))
           (less?   opts) (conj (str "(less)"))
           (less?   opts) (conj (str "(sift   :move {#\"less.css\" \"css/less.css\" #\"less.main.css.map\" \"css/less.main.css.map\"})"))))
 
 (defn production-task-opts [opts]
   (cond-> []
           (garden? opts) (conj (str "garden {:pretty-print false}"))
-          (sass?   opts) (conj (str "sass   {:output-style \"compressed\"}"))
+          (sass?   opts) (conj (str "sass   {:output-style :compressed}"))
           (less?   opts) (conj (str "less   {:compression true}"))))
 
 (defn development-task-opts [opts]
   (cond-> []
-    (sass? opts) (conj (str "sass   {:line-numbers true
-                                     :source-maps  true}"))
     (less? opts) (conj (str "less   {:source-map  true}"))))
 
 (defn index-html-head-tags [opts]
@@ -189,7 +188,7 @@
     (apply (partial ->files data)
            (remove nil?
                    (vector (if (garden? opts)  ["src/clj/{{sanitized}}/styles.clj" (render "styles.clj" data)])
-                           (if (sass? opts)    ["sass/sass.scss" (render "sass.scss" data)])
+                           (if (sass? opts)    ["sass/css/sass.scss" (render "sass.scss" data)])
 
                            (if (test? opts)    ["test/cljs/{{sanitized}}/app_test.cljs" (render "app_test.cljs" data)])
 
