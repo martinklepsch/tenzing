@@ -131,7 +131,7 @@
 (defn production-task-opts [opts]
   (cond-> []
           (garden? opts) (conj (str "garden {:pretty-print false}"))
-          (sass?   opts) (conj (str "sass   {:output-style \"compressed\"}"))
+          (sass?   opts) (conj (str "sass   {:output-style :compressed}"))
           (less?   opts) (conj (str "less   {:compression true}"))))
 
 (defn development-task-opts [opts]
