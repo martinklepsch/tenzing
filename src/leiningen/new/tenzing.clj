@@ -136,8 +136,6 @@
 
 (defn development-task-opts [opts]
   (cond-> []
-    (sass? opts) (conj (str "sass   {:line-numbers true
-                                     :source-maps  true}"))
     (less? opts) (conj (str "less   {:source-map  true}"))))
 
 (defn index-html-head-tags [opts]
