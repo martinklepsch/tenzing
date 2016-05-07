@@ -32,6 +32,9 @@ You can learn more about Boot in
 [a blog post by one of the authors](http://adzerk.com/blog/2014/11/clojurescript-builds-rebooted/),
 its [github project](https://github.com/boot-clj/boot) or
 [a blog post I wrote about it](http://www.martinklepsch.org/posts/why-boot-is-relevant-for-the-clojure-ecosystem.html).
+[Mimmo Costanza's modern-cljs tutorial](https://github.com/magomimmo/modern-cljs) also uses Boot throughout - 
+[Tutorial 2](https://github.com/magomimmo/modern-cljs/blob/master/doc/second-edition/tutorial-02.md)
+walks through the setup of a typical Boot-based development environment.
 
 ## Why #noBackend?
 
