@@ -10,6 +10,8 @@
                  [weasel                    "0.7.0"      :scope "test"]
                  [org.clojure/clojurescript "1.7.228"]{{{deps}}}])
 
+(def write-to-target (atom false))
+
 (require
  '[adzerk.boot-cljs      :refer [cljs]]
  '[adzerk.boot-cljs-repl :refer [cljs-repl start-repl]]
@@ -20,7 +22,10 @@
   (comp (speak)
         {{{pre-build-steps}}}
         (cljs)
-        {{{build-steps}}}))
+        {{{build-steps}}}
+        (if @write-to-target
+          (target :dir #{"target"})
+          identity)))
 
 (deftask run []
   (comp (serve)
@@ -31,6 +36,7 @@
 
 (deftask production []
   (task-options! cljs {:optimizations :advanced}{{{production-task-opts}}})
+  (reset! write-to-target true)
   identity)
 
 (deftask development []
