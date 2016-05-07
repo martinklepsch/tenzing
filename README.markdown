@@ -40,7 +40,7 @@ walks through the setup of a typical Boot-based development environment.
 
 Tenzing is designed with prototyping in mind. Instead of writing your
 own backend you're encouraged to use services like
-[Parse](https://parse.com), [Firebase](https://www.firebase.com),
+[Firebase](https://www.firebase.com),
 [Usergrid](http://usergrid.incubator.apache.org) and others.
 
 If you figure out that you need a Clojure based backend down the road
