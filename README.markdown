@@ -30,7 +30,7 @@ making sure that build steps don't interfere with each other.
 
 You can learn more about Boot in
 [a blog post by one of the authors](http://adzerk.com/blog/2014/11/clojurescript-builds-rebooted/),
-it's [github project](https://github.com/boot-clj/boot) or
+its [github project](https://github.com/boot-clj/boot) or
 [a blog post I wrote about it](http://www.martinklepsch.org/posts/why-boot-is-relevant-for-the-clojure-ecosystem.html).
 
 ## Why #noBackend?
