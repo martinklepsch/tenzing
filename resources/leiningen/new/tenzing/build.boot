@@ -20,7 +20,8 @@
   (comp (speak)
         {{{pre-build-steps}}}
         (cljs)
-        {{{build-steps}}}))
+        {{{build-steps}}}
+        (target :dir #{"target"})))
 
 (deftask run []
   (comp (serve)

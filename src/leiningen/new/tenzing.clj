@@ -125,8 +125,7 @@
           (garden? opts) (conj (str "(garden :styles-var '" name ".styles/screen\n:output-to \"css/garden.css\")"))
           (sass?   opts) (conj (str "(sass :output-dir \"css\")"))
           (less?   opts) (conj (str "(less)"))
-          (less?   opts) (conj (str "(sift   :move {#\"less.css\" \"css/less.css\" #\"less.main.css.map\" \"css/less.main.css.map\"})"))
-          true           (conj (str "(target :dir #{\"target\"})"))))
+          (less?   opts) (conj (str "(sift   :move {#\"less.css\" \"css/less.css\" #\"less.main.css.map\" \"css/less.main.css.map\"})"))))
 
 (defn production-task-opts [opts]
   (cond-> []
