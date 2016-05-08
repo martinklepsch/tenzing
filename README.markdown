@@ -30,14 +30,17 @@ making sure that build steps don't interfere with each other.
 
 You can learn more about Boot in
 [a blog post by one of the authors](http://adzerk.com/blog/2014/11/clojurescript-builds-rebooted/),
-it's [github project](https://github.com/boot-clj/boot) or
+its [github project](https://github.com/boot-clj/boot) or
 [a blog post I wrote about it](http://www.martinklepsch.org/posts/why-boot-is-relevant-for-the-clojure-ecosystem.html).
+[Mimmo Costanza's modern-cljs tutorial](https://github.com/magomimmo/modern-cljs) also uses Boot throughout - 
+[Tutorial 2](https://github.com/magomimmo/modern-cljs/blob/master/doc/second-edition/tutorial-02.md)
+walks through the setup of a typical Boot-based development environment.
 
 ## Why #noBackend?
 
 Tenzing is designed with prototyping in mind. Instead of writing your
 own backend you're encouraged to use services like
-[Parse](https://parse.com), [Firebase](https://www.firebase.com),
+[Firebase](https://www.firebase.com),
 [Usergrid](http://usergrid.incubator.apache.org) and others.
 
 If you figure out that you need a Clojure based backend down the road
