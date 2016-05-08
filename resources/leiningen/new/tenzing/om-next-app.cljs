@@ -7,7 +7,7 @@
 
 (defui App
   Object
-  (render [this] 
+  (render [this]
     (let [{:keys [greeting]} (om/props this)]
       (dom/h1 nil greeting))))
 
@@ -16,6 +16,5 @@
 
 (defn init []
   (om/add-root! reconciler
-                App 
+                App
                 (gdom/getElement "container")))
-
