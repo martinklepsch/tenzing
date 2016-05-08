@@ -171,15 +171,10 @@
 (defn warn-on-exclusive-opts!
   "Some options can't be used together w/o added complexity."
   [opts]
-  (when (and (or (om? opts)
-                 (om-next? opts))
-             (reagent? opts))
-    (main/warn "Please specify only +om/om-next or +reagent, not both.")
-    (main/exit))
-  (when (and (om? opts)
-             (om-next? opts))
-    (main/warn "Please specify only +om or +om-next, not both.")
-    (main/exit)))
+  (let [x (juxt om? om-next? reagent?)]
+    (when-not (>= 1 (count (keep identity (x opts))))
+      (main/warn "Please specify only +om, +om-next or +reagent, not multiple.")
+      (main/exit))))
 
 (defn render-boot-properties []
   (let [{:keys [exit out err]} (sh/sh "boot" "-V" :env {:BOOT_CLOJURE_VERSION "1.7.0"})]
