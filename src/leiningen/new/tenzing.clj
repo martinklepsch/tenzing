@@ -45,7 +45,7 @@
   (wrap-indent identity n list))
 
 ; ---------------------------------------------------------------
-; Options - currently: reagent, om, sass, garden
+; Options - currently: reagent, om, om-next, sass, garden
 ; ---------------------------------------------------------------
 
 (defn reagent? [opts]
@@ -53,6 +53,9 @@
 
 (defn om? [opts]
   (some #{"+om"} opts))
+
+(defn om-next? [opts]
+  (some #{"+om-next"} opts))
 
 (defn sass? [opts]
   (some #{"+sass"} opts))
@@ -80,6 +83,7 @@
   (cond-> []
           (test?    opts) (conj "crisptrutski/boot-cljs-test \"0.2.0-SNAPSHOT\" :scope \"test\"")
           (om?      opts) (conj "org.omcljs/om \"0.8.6\"")
+          (om-next?      opts) (conj "org.omcljs/om \"1.0.0-alpha34\"")
           (reagent? opts) (conj "reagent \"0.5.0\"")
           (garden?  opts) (conj "org.martinklepsch/boot-garden \"1.2.5-3\" :scope \"test\"")
           (sass?    opts) (conj "deraen/boot-sass  \"0.2.1\" :scope \"test\"")
@@ -167,9 +171,14 @@
 (defn warn-on-exclusive-opts!
   "Some options can't be used together w/o added complexity."
   [opts]
-  (when (and (om? opts)
+  (when (and (or (om? opts)
+                 (om-next? opts))
              (reagent? opts))
-    (main/warn "Please specify only +om or +reagent, not both.")
+    (main/warn "Please specify only +om/om-next or +reagent, not both.")
+    (main/exit))
+  (when (and (om? opts)
+             (om-next? opts))
+    (main/warn "Please specify only +om or +om-next, not both.")
     (main/exit)))
 
 (defn render-boot-properties []
@@ -196,6 +205,7 @@
 
                            (cond (reagent? opts) [app-cljs (render "reagent-app.cljs" data)]
                                  (om? opts)      [app-cljs (render "om-app.cljs" data)]
+                                 (om-next? opts) [app-cljs (render "om-next-app.cljs" data)]
                                  :none           [app-cljs (render "app.cljs" data)])
 
                            ["resources/js/app.cljs.edn" (render "app.cljs.edn" data)]
