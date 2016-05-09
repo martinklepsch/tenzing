@@ -214,7 +214,7 @@
                            ["resources/index.html" (render "index.html" data)]
 
                            (when-let [boot-props (render-boot-properties)]
-                             ["boot.properties" (silence-implicit-target-warning boot-props)])
+                             ["boot.properties" (mute-implicit-target-warning boot-props)])
 
                            ["build.boot" (render "build.boot" data)]
                            [".gitignore" (render "gitignore" data)])))))
