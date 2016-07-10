@@ -57,6 +57,9 @@
 (defn om-next? [opts]
   (some #{"+om-next"} opts))
 
+(defn rum? [opts]
+  (some #{"+rum"} opts))
+
 (defn sass? [opts]
   (some #{"+sass"} opts))
 
@@ -83,7 +86,8 @@
   (cond-> []
           (test?    opts) (conj "crisptrutski/boot-cljs-test \"0.2.0-SNAPSHOT\" :scope \"test\"")
           (om?      opts) (conj "org.omcljs/om \"0.8.6\"")
-          (om-next?      opts) (conj "org.omcljs/om \"1.0.0-alpha34\"")
+          (om-next? opts) (conj "org.omcljs/om \"1.0.0-alpha34\"")
+          (rum?     opts) (conj "rum \"0.10.4\"")
           (reagent? opts) (conj "reagent \"0.5.0\"")
           (garden?  opts) (conj "org.martinklepsch/boot-garden \"1.2.5-3\" :scope \"test\"")
           (sass?    opts) (conj "deraen/boot-sass  \"0.2.1\" :scope \"test\"")
@@ -208,6 +212,7 @@
                            (cond (reagent? opts) [app-cljs (render "reagent-app.cljs" data)]
                                  (om? opts)      [app-cljs (render "om-app.cljs" data)]
                                  (om-next? opts) [app-cljs (render "om-next-app.cljs" data)]
+                                 (rum? opts)     [app-cljs (render "rum.cljs" data)]
                                  :none           [app-cljs (render "app.cljs" data)])
 
                            ["resources/js/app.cljs.edn" (render "app.cljs.edn" data)]
