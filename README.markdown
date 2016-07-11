@@ -70,6 +70,9 @@ project will contain:
 -   `+reagent` provides a basic
     [Reagent](https://github.com/reagent-project/reagent) application
     and adds relevant dependencies
+-   `+rum` provides a basic
+    [Rum](https://github.com/tonsky/rum) application
+    and adds relevant dependencies
 -   `+divshot` adds divshot.json for easy deployment to
     [Divshot](https://divshot.com)
 -   `+garden` sets up [Garden](https://github.com/noprompt/garden) and
