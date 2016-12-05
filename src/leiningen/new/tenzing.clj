@@ -84,15 +84,15 @@
 
 (defn dependencies [opts]
   (cond-> []
-          (test?    opts) (conj "crisptrutski/boot-cljs-test \"0.2.0-SNAPSHOT\" :scope \"test\"")
+          (test?    opts) (conj "crisptrutski/boot-cljs-test \"0.3.0\" :scope \"test\"")
           (om?      opts) (conj "org.omcljs/om \"0.8.6\"")
-          (om-next? opts) (conj "org.omcljs/om \"1.0.0-alpha34\"")
-          (rum?     opts) (conj "rum \"0.10.6\"")
+          (om-next? opts) (conj "org.omcljs/om \"1.0.0-alpha47\"")
+          (rum?     opts) (conj "rum \"0.10.7\"")
           (reagent? opts) (conj "reagent \"0.6.0\"")
-          (garden?  opts) (conj "org.martinklepsch/boot-garden \"1.2.5-3\" :scope \"test\"")
-          (sass?    opts) (conj "deraen/boot-sass  \"0.2.1\" :scope \"test\"")
-          (sass?    opts) (conj "org.slf4j/slf4j-nop  \"1.7.13\" :scope \"test\"")
-          (less?    opts) (conj "deraen/boot-less \"0.2.1\" :scope \"test\"")))
+          (garden?  opts) (conj "org.martinklepsch/boot-garden \"1.3.2-0\" :scope \"test\"")
+          (sass?    opts) (conj "deraen/boot-sass  \"0.3.0\" :scope \"test\"")
+          (sass?    opts) (conj "org.slf4j/slf4j-nop  \"1.7.21\" :scope \"test\"")
+          (less?    opts) (conj "deraen/boot-less \"0.6.0\" :scope \"test\"")))
 
 (defn build-requires [opts]
   (cond-> []
