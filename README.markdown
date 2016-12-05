@@ -1,4 +1,7 @@
-# Tenzing, the awesome Clojurescript application template. [![Get help on Clojureverse](https://img.shields.io/badge/tenzing-clojureverse-green.svg)](http://clojureverse.org/c/tenzing)
+# Tenzing, the awesome Clojurescript application template
+
+[rationale](#rationale) | [usage](#usage) | [deployment](#deployment) | [getting help](#getting-help)
+
 
 Tenzing is a [Chestnut](https://github.com/plexus/chestnut)-inspired
 Clojurescript template offering the following features:
@@ -197,12 +200,19 @@ or want to save typing at the command line, it's a simple matter to define your 
 
 ## Deployment
 
-Since Tenzing comes without a backend you can easily deploy your
-app to Amazon S3 or even host it in your Dropbox. To do that just copy
-the files in `target/` to your desired location.
+Since Tenzing comes without a backend you can easily deploy your app
+to Amazon S3 or even host it in your Dropbox. To do that just copy the
+files in `target/` to your desired location.
 
-> PS. A nice tool to easily deploy to S3 from the command line is
-> [stout](https://github.com/EagerIO/Stout).
+> PS. I'm also working on a tool called
+> [Confetti](https://github.com/confetti-clj/confetti) 🎉 that helps
+> you setting up static sites on AWS infrastructure. It's a bit more
+> aimed at people that deploy and manage many static sites but you
+> should probably check it out either way :)
+
+## Getting Help
+
+If you run into any problems feel free to open an issue or ping me (`martinklepsch`) in the [ClojureScript room on Riot.im](https://riot.im/app/#/room/#clojurescript:matrix.org) (no signup required).
 
 # License
 
