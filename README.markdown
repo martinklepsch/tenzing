@@ -73,8 +73,6 @@ project will contain:
 -   `+rum` provides a basic
     [Rum](https://github.com/tonsky/rum) application
     and adds relevant dependencies
--   `+divshot` adds divshot.json for easy deployment to
-    [Divshot](https://divshot.com)
 -   `+garden` sets up [Garden](https://github.com/noprompt/garden) and
     integrates into the build process
 -   `+sass` sets up [Sass](http://sass-lang.com) and integrates into
