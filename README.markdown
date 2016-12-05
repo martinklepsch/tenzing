@@ -3,14 +3,13 @@
 [rationale](#rationale) | [usage](#usage) | [deployment](#deployment) | [getting help](#getting-help)
 
 
-Tenzing is a [Chestnut](https://github.com/plexus/chestnut)-inspired
-Clojurescript template offering the following features:
+Tenzing is a Clojurescript template offering the following features:
 
 1.  Incremental Clojurescript compilation
 2.  Live reloading of your Javascript, CSS, etc.
 3.  Browser-REPL
 
-**There are some significant differences though:**
+**In contrast to some of the options out there it is opinionated in the following ways:**
 
 1.  Tenzing uses [Boot](https://github.com/boot-clj/boot) instead of Leiningen (see below)
 2.  Tenzing does not provide a backend layer (see below)
@@ -213,6 +212,15 @@ files in `target/` to your desired location.
 ## Getting Help
 
 If you run into any problems feel free to open an issue or ping me (`martinklepsch`) in the [ClojureScript room on Riot.im](https://riot.im/app/#/room/#clojurescript:matrix.org) (no signup required).
+
+## Credits
+
+The initial release of Tenzing was prompted by the urge to have
+something like the awesome
+[Chestnut template](https://github.com/plexus/chestnut) but built on
+top of Boot. Many props to [Arne Brasseur](https://lambdaisland.com/)
+for making getting started with ClojureScript a lot easier at the
+time!
 
 # License
 
