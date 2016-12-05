@@ -203,6 +203,8 @@ Since Tenzing comes without a backend you can easily deploy your app
 to Amazon S3 or even host it in your Dropbox. To do that just copy the
 files in `target/` to your desired location.
 
+<img src="https://cloud.githubusercontent.com/assets/97496/11431670/0ef1bb58-949d-11e5-83f7-d07cf1dd89c7.png" alt="confetti logo" align="left" />
+
 > PS. I'm also working on a tool called
 > [Confetti](https://github.com/confetti-clj/confetti) 🎉 that helps
 > you setting up static sites on AWS infrastructure. It's a bit more
