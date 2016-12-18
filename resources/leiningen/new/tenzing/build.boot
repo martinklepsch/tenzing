@@ -26,6 +26,7 @@
   (comp (serve)
         (watch)
         (cljs-repl)
+        {{{run-steps}}}
         (reload)
         (build)))
 
