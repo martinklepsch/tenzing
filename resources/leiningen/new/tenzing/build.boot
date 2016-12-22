@@ -34,7 +34,7 @@
   identity)
 
 (deftask development []
-  (task-options! cljs {:optimizations :none :source-map true}
+  (task-options! cljs {:optimizations :none}
                  reload {:on-jsload '{{name}}.app/init}{{{development-task-opts}}})
   identity)
 
