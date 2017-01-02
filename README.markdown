@@ -105,7 +105,9 @@ project will contain:
     [cljs test-runner](https://github.com/crisptrutski/boot-cljs-test)
     and adds a `test` task.
 -   `+devtools` adds a
-    [cljs-devtools](https://github.com/binaryage/cljs-devtools) and
+    [cljs-devtools](https://github.com/binaryage/cljs-devtools) through
+    [boot-cljs-devtools](https://github.com/boot-clj/boot-cljs-devtools)
+-   `+dirac` adds a
     [dirac](https://github.com/binaryage/dirac) through
     [boot-cljs-devtools](https://github.com/boot-clj/boot-cljs-devtools).
 
