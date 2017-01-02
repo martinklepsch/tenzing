@@ -44,9 +44,9 @@
 (defn indent [n list]
   (wrap-indent identity n list))
 
-; --------------------------------------------------------------- ---
-; Options - currently: reagent, om, om-next, sass, garden, devtools
-; --------------------------------------------------------------- ---
+;; -------------------------------------------------------------------------
+;; Options - currently: reagent, om, om-next, sass, garden, devtools, dirac
+;; -------------------------------------------------------------------------
 
 (defn reagent? [opts]
   (some #{"+reagent"} opts))
@@ -75,6 +75,14 @@
 (defn devtools? [opts]
   (some #{"+devtools"} opts))
 
+(defn dirac? [opts]
+  (some #{"+dirac"} opts))
+
+(defn boot-cljs-devtools? [opts]
+  (or
+   (devtools? opts)
+   (dirac? opts)))
+
 ;; ---------------------------------------------------------------
 ;; Template data helpers
 ;; ---------------------------------------------------------------
@@ -87,26 +95,26 @@
 
 (defn dependencies [opts]
   (cond-> []
-          (test?     opts) (conj "crisptrutski/boot-cljs-test \"0.3.0\" :scope \"test\"")
-          (om?       opts) (conj "org.omcljs/om \"0.8.6\"")
-          (om-next?  opts) (conj "org.omcljs/om \"1.0.0-alpha47\"")
-          (rum?      opts) (conj "rum \"0.10.7\"")
-          (reagent?  opts) (conj "reagent \"0.6.0\"")
-          (garden?   opts) (conj "org.martinklepsch/boot-garden \"1.3.2-0\" :scope \"test\"")
-          (sass?     opts) (conj "deraen/boot-sass  \"0.3.0\" :scope \"test\"")
-          (sass?     opts) (conj "org.slf4j/slf4j-nop  \"1.7.21\" :scope \"test\"")
-          (less?     opts) (conj "deraen/boot-less \"0.6.0\" :scope \"test\"")
-          (devtools? opts) (conj "binaryage/devtools \"0.8.3\" :scope \"test\""
-                                 "binaryage/dirac \"0.8.7\" :scope \"test\""
-                                 "powerlaces/boot-cljs-devtools \"0.1.2\" :scope \"test\"")))
+          (test?     opts)           (conj "crisptrutski/boot-cljs-test \"0.3.0\" :scope \"test\"")
+          (om?       opts)           (conj "org.omcljs/om \"0.8.6\"")
+          (om-next?  opts)           (conj "org.omcljs/om \"1.0.0-alpha47\"")
+          (rum?      opts)           (conj "rum \"0.10.7\"")
+          (reagent?  opts)           (conj "reagent \"0.6.0\"")
+          (garden?   opts)           (conj "org.martinklepsch/boot-garden \"1.3.2-0\" :scope \"test\"")
+          (sass?     opts)           (conj "deraen/boot-sass  \"0.3.0\" :scope \"test\"")
+          (sass?     opts)           (conj "org.slf4j/slf4j-nop  \"1.7.21\" :scope \"test\"")
+          (less?     opts)           (conj "deraen/boot-less \"0.6.0\" :scope \"test\"")
+          (devtools? opts)           (conj "binaryage/devtools \"0.8.3\" :scope \"test\"")
+          (dirac?    opts)           (conj "binaryage/dirac \"0.8.8\" :scope \"test\"")
+          (boot-cljs-devtools? opts) (conj "powerlaces/boot-cljs-devtools \"0.1.3-SNAPSHOT\" :scope \"test\"")))
 
 (defn build-requires [opts]
   (cond-> []
-          (test?     opts) (conj "'[crisptrutski.boot-cljs-test :refer [test-cljs]]")
-          (garden?   opts) (conj "'[org.martinklepsch.boot-garden :refer [garden]]")
-          (sass?     opts) (conj "'[deraen.boot-sass :refer [sass]]")
-          (less?     opts) (conj "'[deraen.boot-less :refer [less]]")
-          (devtools? opts) (conj "'[powerlaces.boot-cljs-devtools :refer [cljs-devtools]]")))
+          (test?     opts)           (conj "'[crisptrutski.boot-cljs-test :refer [test-cljs]]")
+          (garden?   opts)           (conj "'[org.martinklepsch.boot-garden :refer [garden]]")
+          (sass?     opts)           (conj "'[deraen.boot-sass :refer [sass]]")
+          (less?     opts)           (conj "'[deraen.boot-less :refer [less]]")
+          (boot-cljs-devtools? opts) (conj "'[powerlaces.boot-cljs-devtools :refer [cljs-devtools dirac]]")))
 
 (def test-tasks
 "(deftask testing []
@@ -144,7 +152,9 @@
           (less?   opts) (conj (str "(sift   :move {#\"less.css\" \"css/less.css\" #\"less.main.css.map\" \"css/less.main.css.map\"})"))))
 
 (defn run-steps [name opts]
-  (if (devtools? opts) ["(cljs-devtools)"]))
+  (cond-> []
+          (devtools? opts) (conj "(cljs-devtools)")
+          (dirac? opts) (conj "(dirac)")))
 
 (defn production-task-opts [opts]
   (cond-> []
