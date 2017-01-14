@@ -60,9 +60,29 @@ approach for building early iterations of your application.
 
 ## Create a Project
 
-To create a new project we piggieback the existing `lein new` tooling:
+To create a new project, [install boot](https://github.com/boot-clj/boot#install) and run:
 
-    $ lein new tenzing your-app
+```shell
+$ boot -d seancorfield/boot-new new -t tenzing -n your-app
+```
+
+Template options are specified using the `-a` switch. For example:
+
+```shell
+$ boot -d seancorfield/boot-new new -t tenzing -n your-app -a +reagent -a +test
+```
+
+Alternatively, if you have leiningen installed, you can run
+
+```shell
+$ lein new tenzing your-app
+```
+
+or to specify options:
+
+```shell
+$ lein new tenzing your-app +reagent +test
+```
 
 There are a bunch of options that determine what your newly created
 project will contain:
