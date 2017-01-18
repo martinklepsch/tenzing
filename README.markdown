@@ -124,7 +124,7 @@ by Boot and the respective source file will get compiled. When a
 compiled file changes through that mechanism it will get pushed to the
 browser.
 
-If you've use the `+test` option, then you'll be able to run unit
+If you used the `+test` option, then you'll be able to run unit
 tests via `boot test`. Use `boot auto-test` to have tests
 automatically rerun on file changes.
 
