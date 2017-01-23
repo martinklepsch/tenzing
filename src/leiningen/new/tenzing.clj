@@ -104,8 +104,8 @@
           (sass?     opts)           (conj "deraen/boot-sass  \"0.3.0\" :scope \"test\"")
           (sass?     opts)           (conj "org.slf4j/slf4j-nop  \"1.7.21\" :scope \"test\"")
           (less?     opts)           (conj "deraen/boot-less \"0.6.0\" :scope \"test\"")
-          (devtools? opts)           (conj "binaryage/devtools \"0.8.3\" :scope \"test\"")
-          (dirac?    opts)           (conj "binaryage/dirac \"0.8.8\" :scope \"test\"")
+          (devtools? opts)           (conj "binaryage/devtools \"0.9.0\" :scope \"test\"")
+          (dirac?    opts)           (conj "binaryage/dirac \"1.1.0\" :scope \"test\"")
           (boot-cljs-devtools? opts) (conj "powerlaces/boot-cljs-devtools \"0.1.3-SNAPSHOT\" :scope \"test\"")))
 
 (defn build-requires [opts]
@@ -137,9 +137,11 @@
         (test-cljs :js-env :phantom)))")
 
 (defn build-tasks [opts]
+                                        ;FIXME: remove with test-tasks
   (cond-> []
           (test? opts) (conj test-tasks)))
 
+                                        ;FIXME: remove
 ;; (defn pre-build-steps [name opts]
 ;;   (cond-> []
 ;;           ))
@@ -163,11 +165,13 @@
           (less?   opts) (conj (str "less   {:compression true}"))))
 
 (defn development-task-opts [opts]
+                                        ;FIXME: change to if
   (cond-> []
     (less? opts) (conj (str "less   {:source-map  true}"))))
 
 (defn index-html-head-tags [opts]
   (letfn [(style-tag [href] (str "<link href=\"" href "\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\">"))]
+                                        ;FIXME: rename all styles to styles.css
     (cond-> []
             (garden? opts) (conj (style-tag "css/garden.css"))
             (sass? opts)   (conj (style-tag "css/sass.css"))
@@ -175,6 +179,7 @@
 
 (defn index-html-script-tags [opts]
   (letfn [(script-tag [src] (str "<script type=\"text/javascript\" src=\"" src "\"></script>"))]
+                                        ;FIXME: move to index.html without this
     (cond-> []
             :finally (conj (script-tag "js/app.js")))))
 
@@ -182,6 +187,7 @@
   {:name                   name
    :sanitized              (name-to-path name)
    :source-paths           (source-paths opts)
+                                        ;FIXME: only test task here
    :tasks                  (indent 0 (build-tasks opts))
    :deps                   (dep-list 17 (dependencies opts))
    :requires               (indent 1 (build-requires opts))
