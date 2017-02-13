@@ -104,8 +104,8 @@
           (sass?     opts)           (conj "deraen/boot-sass  \"0.3.0\" :scope \"test\"")
           (sass?     opts)           (conj "org.slf4j/slf4j-nop  \"1.7.21\" :scope \"test\"")
           (less?     opts)           (conj "deraen/boot-less \"0.6.0\" :scope \"test\"")
-          (devtools? opts)           (conj "binaryage/devtools \"0.9.0\" :scope \"test\"")
-          (dirac?    opts)           (conj "binaryage/dirac \"1.1.3\" :scope \"test\"")
+          (devtools? opts)           (conj "binaryage/devtools \"0.9.1\" :scope \"test\"")
+          (dirac?    opts)           (conj "binaryage/dirac \"1.1.4\" :scope \"test\"")
           (boot-cljs-devtools? opts) (conj "powerlaces/boot-cljs-devtools \"0.2.0\" :scope \"test\"")))
 
 (defn build-requires [opts]
