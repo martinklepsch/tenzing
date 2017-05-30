@@ -8,7 +8,7 @@
                  [com.cemerick/piggieback   "0.2.1"      :scope "test"]
                  [org.clojure/tools.nrepl   "0.2.12"     :scope "test"]
                  [weasel                    "0.7.0"      :scope "test"]
-                 [org.clojure/clojurescript "1.9.293"]{{{deps}}}])
+                 [org.clojure/clojurescript "1.9.562"]{{{deps}}}])
 
 (require
  '[adzerk.boot-cljs      :refer [cljs]]
