@@ -6,7 +6,7 @@
                  [adzerk/boot-reload        "0.5.1"      :scope "test"]
                  [pandeiro/boot-http        "0.8.3"      :scope "test"]
                  [com.cemerick/piggieback   "0.2.1"      :scope "test"]
-                 [org.clojure/tools.nrepl   "0.2.12"     :scope "test"]
+                 [org.clojure/tools.nrepl   "0.2.13"     :scope "test"]
                  [weasel                    "0.7.0"      :scope "test"]
                  [org.clojure/clojurescript "1.9.562"]{{{deps}}}])
 
