@@ -95,7 +95,7 @@
 
 (defn dependencies [opts]
   (cond-> []
-          (test?     opts)           (conj "crisptrutski/boot-cljs-test \"0.3.0\" :scope \"test\"")
+          (test?     opts)           (conj "crisptrutski/boot-cljs-test \"0.3.4\" :scope \"test\"")
           (om?       opts)           (conj "org.omcljs/om \"0.8.6\"")
           (om-next?  opts)           (conj "org.omcljs/om \"1.0.0-alpha47\"")
           (rum?      opts)           (conj "rum \"0.10.7\"")
@@ -104,8 +104,8 @@
           (sass?     opts)           (conj "deraen/boot-sass  \"0.3.0\" :scope \"test\"")
           (sass?     opts)           (conj "org.slf4j/slf4j-nop  \"1.7.21\" :scope \"test\"")
           (less?     opts)           (conj "deraen/boot-less \"0.6.0\" :scope \"test\"")
-          (devtools? opts)           (conj "binaryage/devtools \"0.9.4\" :scope \"test\"")
-          (dirac?    opts)           (conj "binaryage/dirac \"1.2.15\" :scope \"test\"")
+          (devtools? opts)           (conj "binaryage/devtools \"0.9.7\" :scope \"test\"")
+          (dirac?    opts)           (conj "binaryage/dirac \"1.2.17\" :scope \"test\"")
           (boot-cljs-devtools? opts) (conj "powerlaces/boot-cljs-devtools \"0.2.0\" :scope \"test\"")))
 
 (defn build-requires [opts]
