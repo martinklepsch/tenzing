@@ -45,11 +45,14 @@
   (wrap-indent identity n list))
 
 ;; -------------------------------------------------------------------------
-;; Options - currently: reagent, om, om-next, sass, garden, devtools, dirac
+;; Options - currently: reagent, re-frame, om, om-next, sass, garden, devtools, dirac
 ;; -------------------------------------------------------------------------
 
 (defn reagent? [opts]
   (some #{"+reagent"} opts))
+
+(defn re-frame? [opts]
+  (some #{"+re-frame"} opts))
 
 (defn om? [opts]
   (some #{"+om"} opts))
@@ -100,6 +103,9 @@
           (om-next?  opts)           (conj "org.omcljs/om \"1.0.0-alpha47\"")
           (rum?      opts)           (conj "rum \"0.10.7\"")
           (reagent?  opts)           (conj "reagent \"0.6.0\"")
+          (re-frame? opts)           (conj "re-frame \"0.10.2\""
+                                           "day8/re-frame-tracer \"0.1.1-SNAPSHOT\""
+                                           "org.clojars.stumitchell/clairvoyant \"0.2.0\"")
           (garden?   opts)           (conj "org.martinklepsch/boot-garden \"1.3.2-0\" :scope \"test\"")
           (sass?     opts)           (conj "deraen/boot-sass  \"0.3.0\" :scope \"test\"")
           (sass?     opts)           (conj "org.slf4j/slf4j-nop  \"1.7.21\" :scope \"test\"")
@@ -167,7 +173,12 @@
 (defn development-task-opts [opts]
                                         ;FIXME: change to if
   (cond-> []
-    (less? opts) (conj (str "less   {:source-map  true}"))))
+    (less? opts)      (conj (str "less   {:source-map  true}"))
+    (re-frame? opts)  (conj (str "cljs   {:optimizations :none"
+                                 " :source-map true"
+                                 " :compiler-options {:devcards true"
+                                 " :closure-defines {\"clairvoyant.core.devmode\" true}}}\n"
+                                 "reload {:on-jsload '{{sanitized}}.app/dev-reload}"))))
 
 (defn index-html-head-tags [opts]
   (letfn [(style-tag [href] (str "<link href=\"" href "\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\">"))]
@@ -215,9 +226,9 @@
 
 (defn mute-implicit-target-warning [boot-props]
   (let [line-sep (System/getProperty "line.separator")]
-    (string/join line-sep 
-                 (conj (string/split (render-boot-properties) 
-                                     (re-pattern line-sep)) 
+    (string/join line-sep
+                 (conj (string/split (render-boot-properties)
+                                     (re-pattern line-sep))
                        (str "BOOT_EMIT_TARGET=no" line-sep)))))
 
 (defn tenzing
@@ -236,11 +247,12 @@
 
                            (if (less? opts)    ["less/less.main.less" (render "less.main.less" data)])
 
-                           (cond (reagent? opts) [app-cljs (render "reagent-app.cljs" data)]
-                                 (om? opts)      [app-cljs (render "om-app.cljs" data)]
-                                 (om-next? opts) [app-cljs (render "om-next-app.cljs" data)]
-                                 (rum? opts)     [app-cljs (render "rum.cljs" data)]
-                                 :none           [app-cljs (render "app.cljs" data)])
+                           (cond (reagent? opts)  [app-cljs (render "reagent-app.cljs" data)]
+                                 (re-frame? opts) [app-cljs (render "re-frame-app.cljs" data)]
+                                 (om? opts)       [app-cljs (render "om-app.cljs" data)]
+                                 (om-next? opts)  [app-cljs (render "om-next-app.cljs" data)]
+                                 (rum? opts)      [app-cljs (render "rum.cljs" data)]
+                                 :none            [app-cljs (render "app.cljs" data)])
 
                            ["resources/js/app.cljs.edn" (render "app.cljs.edn" data)]
                            ["resources/index.html" (render "index.html" data)]
