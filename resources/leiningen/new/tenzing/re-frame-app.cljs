@@ -1,45 +1,35 @@
 (ns {{name}}.app
-    (:require [reagent.core :as reagent :refer [atom]]
-              [clairvoyant.core :refer-macros [trace-forms]]
-              [re-frame-tracer.core :refer [tracer]]
+    (:require [reagent.core :as reagent]
               [re-frame.core :as re-frame]))
 
 (defn setup! []
   ;; Cofx Registrations
-  (trace-forms {:tracer (tracer :color "purple")}
-    (re-frame/reg-cofx
-     :thing
-     (fn thing-cofx [cofx _]
-       ))
+  (re-frame/reg-cofx
+   :thing
+   (fn thing-cofx [cofx _]
+     ))
 
-    )
 
   ;; Fx Registrations
-  (trace-forms {:tracer (tracer :color "gold")}
-    (re-frame/reg-fx
-     :thing
-     (fn thing-fx [calls]
-       ))
+  (re-frame/reg-fx
+   :thing
+   (fn thing-fx [calls]
+     ))
 
-    )
 
   ;; Events Registrations
-  (trace-forms {:tracer (tracer :color "green")}
-    (re-frame/reg-event-db
-     :init-db
-     (fn init-db-event [db [_ error]]
-       {:page-key ::main}))
+  (re-frame/reg-event-db
+   :init-db
+   (fn init-db-event [db [_ error]]
+     {:page-key ::main}))
 
-    )
 
   ;; Subscriptions Registrations
-  (trace-forms {:tracer (tracer :color "brown")}
-    (re-frame/reg-sub
-     :page-key
-     (fn page-key-sub [app-db _]
-       (:page-key app-db)))
-
-    ))
+  (re-frame/reg-sub
+   :page-key
+   (fn page-key-sub [app-db _]
+     (:page-key app-db)))
+  )
 
 (defn four-oh-four []
   [:div
@@ -65,7 +55,11 @@
     (reagent/render-component [#'main-panel-container] node)))
 
 (defn ^:export init []
-  (re-frame.core/clear-subscription-cache!)
   (setup!)
   (re-frame/dispatch [:init-db])
+  (render-root))
+
+(defn dev-reload []
+  (re-frame.core/clear-subscription-cache!)
+  (setup!)
   (render-root))

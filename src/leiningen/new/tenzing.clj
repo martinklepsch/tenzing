@@ -103,9 +103,9 @@
           (om-next?  opts)           (conj "org.omcljs/om \"1.0.0-alpha47\"")
           (rum?      opts)           (conj "rum \"0.10.7\"")
           (reagent?  opts)           (conj "reagent \"0.6.0\"")
-          (re-frame? opts)           (conj "re-frame \"0.10.2\""
-                                           "day8/re-frame-tracer \"0.1.1-SNAPSHOT\""
-                                           "org.clojars.stumitchell/clairvoyant \"0.2.0\"")
+          (re-frame? opts)           (conj "re-frame \"0.10.5\""
+                                           "reagent \"0.7.0\""
+                                           "day8.re-frame/re-frame-10x \"0.3.3\" :scope \"test\"")
           (garden?   opts)           (conj "org.martinklepsch/boot-garden \"1.3.2-0\" :scope \"test\"")
           (sass?     opts)           (conj "deraen/boot-sass  \"0.3.0\" :scope \"test\"")
           (sass?     opts)           (conj "org.slf4j/slf4j-nop  \"1.7.21\" :scope \"test\"")
@@ -176,9 +176,10 @@
     (less? opts)      (conj (str "less   {:source-map  true}"))
     (re-frame? opts)  (conj (str "cljs   {:optimizations :none"
                                  " :source-map true"
-                                 " :compiler-options {:devcards true"
-                                 " :closure-defines {\"clairvoyant.core.devmode\" true}}}\n"
-                                 "reload {:on-jsload '{{sanitized}}.app/dev-reload}"))))
+                                 " :compiler-options { "
+                                 "  :closure-defines {\"re_frame.trace.trace_enabled_QMARK_\" true}"
+                                 "  :preloads '[day8.re-frame-10x.preload]}}"
+                                 " reload {:on-jsload '{{sanitized}}.app/dev-reload}"))))
 
 (defn index-html-head-tags [opts]
   (letfn [(style-tag [href] (str "<link href=\"" href "\" rel=\"stylesheet\" type=\"text/css\" media=\"screen\">"))]
