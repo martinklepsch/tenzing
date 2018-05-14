@@ -105,6 +105,7 @@
           (reagent?  opts)           (conj "reagent \"0.6.0\"")
           (re-frame? opts)           (conj "re-frame \"0.10.5\""
                                            "reagent \"0.7.0\""
+                                           "org.clojure/tools.reader \"1.3.0-alpha3\""
                                            "day8.re-frame/re-frame-10x \"0.3.3\" :scope \"test\"")
           (garden?   opts)           (conj "org.martinklepsch/boot-garden \"1.3.2-0\" :scope \"test\"")
           (sass?     opts)           (conj "deraen/boot-sass  \"0.3.0\" :scope \"test\"")
