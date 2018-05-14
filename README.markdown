@@ -92,6 +92,9 @@ project will contain:
 -   `+reagent` provides a basic
     [Reagent](https://github.com/reagent-project/reagent) application
     and adds relevant dependencies
+-   `+re-frame` provides a basic
+    [Reframe](https://github.com/Day8/re-frame) application and adds
+    relevant dependencies
 -   `+rum` provides a basic
     [Rum](https://github.com/tonsky/rum) application
     and adds relevant dependencies
